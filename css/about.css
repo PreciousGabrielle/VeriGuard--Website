@@ -1,0 +1,264 @@
+/* =====================================================
+   ABOUT US
+   Dark navy background with soft glows and a faint grid,
+   matching the look of the promotional video.
+===================================================== */
+
+.about-section {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    color: #b9cbe6;
+    background:
+        radial-gradient(ellipse 80% 50% at 50% 0%, #163a7a 0%, transparent 70%),
+        linear-gradient(180deg, #0a1b3d 0%, #071330 100%);
+}
+
+/* ---------- Decorative background ---------- */
+.about-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.about-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+}
+
+.orb-1 {
+    width: 520px;
+    height: 520px;
+    top: 18%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2f7cf0;
+    opacity: 0.28;
+}
+
+.orb-2 {
+    width: 360px;
+    height: 360px;
+    bottom: -80px;
+    right: -60px;
+    background: #4eb6ff;
+    opacity: 0.14;
+}
+
+.about-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(140, 180, 255, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(140, 180, 255, 0.07) 1px, transparent 1px);
+    background-size: 56px 56px;
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 35%, #000 0%, transparent 75%);
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 35%, #000 0%, transparent 75%);
+}
+
+/* ---------- Company logo + heading ---------- */
+.about-intro {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: clamp(24px, 4vw, 48px);
+    margin-bottom: clamp(14px, 2.4vh, 48px);
+}
+
+.about-intro .section-heading {
+    margin: 0;
+    max-width: none;
+    text-align: left;
+}
+
+.about-intro .section-heading p {
+    margin: 0;
+}
+
+.about-intro strong {
+    color: var(--white);
+}
+
+/* logo sits on a white card because the logo has a white background */
+.company-logo {
+    width: clamp(190px, 30vh, 280px);
+    padding: clamp(10px, 1.6vh, 16px);
+    border-radius: 24px;
+    background: var(--white);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35), 0 0 60px rgba(61, 139, 245, 0.25);
+}
+
+.company-logo img {
+    width: 100%;
+    height: auto;
+}
+
+/* ---------- Mission / Vision / Objectives ---------- */
+.mvo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    gap: 20px;
+}
+
+/* icon sits beside the title to keep cards compact */
+.mvo-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-content: start;
+    align-items: center;
+    column-gap: 14px;
+    padding: clamp(14px, 2.4vh, 32px) 24px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    transition: border-color 0.25s ease, background 0.25s ease;
+}
+
+.mvo-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(106, 168, 255, 0.4);
+}
+
+.mvo-icon {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border-radius: 16px;
+    color: var(--white);
+    background: var(--gradient);
+    box-shadow: 0 10px 24px rgba(31, 111, 229, 0.4);
+}
+
+.mvo-icon .icon {
+    width: 22px;
+    height: 22px;
+}
+
+.mvo-card h3 {
+    font-size: 20px;
+    color: var(--white);
+}
+
+.mvo-card p,
+.mvo-card ol {
+    grid-column: 1 / -1;
+    margin-top: clamp(10px, 1.8vh, 16px);
+    font-size: 15px;
+}
+
+.mvo-objectives ol {
+    display: grid;
+    gap: clamp(6px, 1.2vh, 10px);
+    counter-reset: obj;
+}
+
+.mvo-objectives li {
+    position: relative;
+    padding-left: 34px;
+    counter-increment: obj;
+}
+
+.mvo-objectives li::before {
+    content: counter(obj);
+    position: absolute;
+    left: 0;
+    top: 1px;
+    width: 22px;
+    height: 22px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--white);
+    background: rgba(106, 168, 255, 0.25);
+    border: 1px solid rgba(106, 168, 255, 0.5);
+}
+
+/* ---------- Team ---------- */
+/* "Meet the Team" title above the three name cards */
+.team {
+    margin-top: clamp(12px, 2.2vh, 48px);
+    text-align: center;
+}
+
+.team-title {
+    margin-bottom: clamp(8px, 1.4vh, 20px);
+    font-size: clamp(18px, 3vh, 22px);
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--white);
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.team-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-align: left;
+    padding: clamp(8px, 1.4vh, 20px) 18px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.team-avatar {
+    width: clamp(48px, 8vh, 84px);
+    height: clamp(48px, 8vh, 84px);
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--white);
+    background: var(--gradient);
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.08), 0 12px 28px rgba(31, 111, 229, 0.45);
+    overflow: hidden;
+}
+
+/* If you add a photo: <span class="team-avatar"><img src="img/team/name.jpg" alt="Name"></span> */
+.team-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    background: var(--white);
+}
+
+.team-avatar .icon {
+    width: 30px;
+    height: 30px;
+}
+
+.team-card strong {
+    font-size: 16px;
+    line-height: 1.35;
+    color: var(--white);
+}
+
+.team-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.team-card small {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.35;
+    color: #8fb4f0;
+}
+
+.team-card .team-role {
+    font-weight: 500;
+    color: #b9cbe6;
+}

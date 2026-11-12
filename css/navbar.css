@@ -1,0 +1,114 @@
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.85);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+}
+
+.navbar {
+    height: var(--header-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+/* ---------- Logo (also used in the footer) ---------- */
+.logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-image {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.logo-text {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--navy);
+}
+
+.logo-text span {
+    color: var(--blue);
+}
+
+/* ---------- Links ---------- */
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.nav-links a {
+    position: relative;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    transition: color 0.2s ease;
+}
+
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--blue);
+    transform: scaleX(0);
+    transition: transform 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: var(--navy);
+}
+
+.nav-links a:hover::after {
+    transform: scaleX(1);
+}
+
+/* ---------- Mobile menu button (shown in responsive.css) ---------- */
+.nav-toggle {
+    display: none;
+    width: 44px;
+    height: 44px;
+    place-items: center;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--white);
+    color: var(--navy);
+    cursor: pointer;
+}
+
+.nav-toggle .icon {
+    width: 22px;
+    height: 22px;
+}
+
+.nav-toggle .icon-close,
+.nav-open .nav-toggle .icon-open {
+    display: none;
+}
+
+.nav-open .nav-toggle .icon-close {
+    display: block;
+}

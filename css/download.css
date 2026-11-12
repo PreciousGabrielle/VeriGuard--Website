@@ -1,0 +1,106 @@
+/* =====================================================
+   DOWNLOAD (call-to-action band)
+===================================================== */
+
+.download-section {
+    background: var(--bg);
+}
+
+.download-card {
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    align-items: center;
+    gap: 32px;
+    padding: 64px 64px 0;
+    border-radius: 32px;
+    background:
+        radial-gradient(circle at 90% 10%, rgba(255, 255, 255, 0.18), transparent 40%),
+        linear-gradient(135deg, #2f7cf0 0%, #1556c4 55%, #0f3f99 100%);
+    box-shadow: 0 30px 60px rgba(21, 86, 196, 0.3);
+}
+
+.download-text {
+    padding-bottom: 64px;
+}
+
+.download-text h2 {
+    margin: 12px 0 16px;
+    font-size: clamp(30px, 4vw, 44px);
+    font-weight: 800;
+    color: var(--white);
+}
+
+.download-text p {
+    max-width: 480px;
+    font-size: 17px;
+    color: #d7e6ff;
+}
+
+.download-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 32px;
+}
+
+/* App Store + Google Play badges (images only, not links) */
+.store-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.store-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 52px;
+    padding: 0 20px;
+    border-radius: 12px;
+    color: var(--white);
+    background: #000;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.store-badge:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
+.store-badge svg {
+    width: 24px;
+    height: 24px;
+}
+
+.store-badge span {
+    display: flex;
+    flex-direction: column;
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 1.1;
+}
+
+.store-badge small {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    opacity: 0.8;
+}
+
+/* Phone peeking up from the bottom of the card */
+.download-phone {
+    align-self: end;
+    display: flex;
+    justify-content: center;
+    height: 380px;
+    overflow: hidden;
+}
+
+.download-phone .phone {
+    --w: 240px;
+}

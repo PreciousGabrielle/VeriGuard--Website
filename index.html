@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="VeriGuard checks links, QR codes and files for signs of phishing and scams, then tells you in plain language what to do next. Scan. Verify. Stay safe.">
+    <title>VeriGuard | Scan. Verify. Stay Safe.</title>
+    <link rel="icon" type="image/png" href="img/logo.png">
+
+    <!-- Font: Inter (Google Fonts, SIL Open Font License) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Styles: base first, then one file per section, responsive last -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/problem.css">
+    <link rel="stylesheet" href="css/features.css">
+    <link rel="stylesheet" href="css/showcase.css">
+    <link rel="stylesheet" href="css/how-it-work.css">
+    <link rel="stylesheet" href="css/about.css">
+    <link rel="stylesheet" href="css/download.css">
+    <link rel="stylesheet" href="css/contact.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/effects.css">
+    <link rel="stylesheet" href="css/responsive.css">
+
+    <script src="js/main.js" defer></script>
+</head>
+
+<body>
+    <!-- ============ ICON SPRITE (icons adapted from Lucide, ISC License) ============ -->
+    <svg class="sprite" aria-hidden="true">
+        <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
+        <symbol id="i-qr" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="M14 14h3v3h-3zM21 14v.01M14 21v.01M17.5 21H21M21 17.5V21"/></symbol>
+        <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></symbol>
+        <symbol id="i-shield-check" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+        <symbol id="i-shield-alert" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M12 8v4M12 16h.01"/></symbol>
+        <symbol id="i-list-check" viewBox="0 0 24 24"><path d="m3 17 2 2 4-4M3 7l2 2 4-4M13 6h8M13 12h8M13 18h8"/></symbol>
+        <symbol id="i-book" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+        <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+        <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+        <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+        <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></symbol>
+        <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></symbol>
+        <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+        <symbol id="i-close" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+        <symbol id="i-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m10 8 6 4-6 4z"/></symbol>
+        <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+        <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><path d="M1 21a8 8 0 0 1 16 0M16 4a4 4 0 0 1 0 8M19 14a7 7 0 0 1 4 7"/></symbol>
+        <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+        <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+        <symbol id="i-flag" viewBox="0 0 24 24"><path d="M4 22V4M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1"/></symbol>
+        <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8"/></symbol>
+    </svg>
+
+    <!-- ============ NAVBAR ============ -->
+    <header class="site-header">
+        <nav class="navbar container" aria-label="Main">
+            <a href="#home" class="logo">
+                <img src="img/logo.png" alt="VeriGuard logo" class="logo-image">
+                <span class="logo-text">Veri<span>Guard</span></span>
+            </a>
+
+            <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
+                <svg class="icon icon-open"><use href="#i-menu"/></svg>
+                <svg class="icon icon-close"><use href="#i-close"/></svg>
+            </button>
+
+            <div class="nav-menu" id="nav-menu">
+                <ul class="nav-links">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </ul>
+                <a href="#prototype" class="btn btn-primary btn-sm">Our Prototype</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- ============ HOME ============ -->
+        <section class="hero" id="home">
+            <div class="hero-container container">
+                <div class="hero-content">
+                    <span class="eyebrow-pill">
+                        <svg class="icon"><use href="#i-shield-check"/></svg>
+                        Scan. Verify. Stay safe.
+                    </span>
+
+                    <h1>Think before<br><span class="text-gradient swoosh">you click.</span></h1>
+
+                    <p class="hero-description">
+                        VeriGuard is a mobile app that checks links, QR codes and files for signs of phishing
+                        and scams, then explains the risk in plain language and tells you what to do next.
+                    </p>
+
+                    <div class="hero-buttons">
+                        <a href="#prototype" class="btn btn-primary">
+                            Explore Our Prototype
+                            <svg class="icon"><use href="#i-arrow"/></svg>
+                        </a>
+                    </div>
+
+                    <ul class="hero-checks">
+                        <li><svg class="icon"><use href="#i-link"/></svg>Links</li>
+                        <li><svg class="icon"><use href="#i-qr"/></svg>QR codes</li>
+                        <li><svg class="icon"><use href="#i-file"/></svg>Files &amp; screenshots</li>
+                    </ul>
+                </div>
+
+                <!-- Promo video: autoplays muted on loop (browsers only allow muted autoplay) -->
+                <div class="hero-visual" id="promo-video">
+                    <div class="hero-glow"></div>
+
+                    <div class="scan-frame">
+                        <!-- scanner corner brackets, like the QR scanner in the app -->
+                        <span class="scan-corner tl" aria-hidden="true"></span>
+                        <span class="scan-corner tr" aria-hidden="true"></span>
+                        <span class="scan-corner bl" aria-hidden="true"></span>
+                        <span class="scan-corner br" aria-hidden="true"></span>
+
+                        <div class="scan-border">
+                            <video class="hero-video-player" autoplay muted loop playsinline preload="auto" poster="img/video-poster.jpg" aria-label="VeriGuard promotional video">
+                                <source src="video/veriguard-promo.mp4" type="video/mp4">
+                            </video>
+
+                            <button class="sound-toggle" type="button" aria-label="Turn sound on" aria-pressed="false">
+                                <svg class="icon icon-muted" viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4zM22 9l-6 6M16 9l6 6"/></svg>
+                                <svg class="icon icon-sound" viewBox="0 0 24 24"><path d="M11 5 6 9H2v6h4l5 4zM15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ PROBLEM & SOLUTION ============ -->
+        <section class="section problem-section" id="problem">
+            <div class="container">
+                <div class="section-heading">
+                    <span class="eyebrow">Why VeriGuard</span>
+                    <h2>Scams are getting <span class="text-gradient swoosh">harder to spot</span></h2>
+                    <p>Fake links, messages and QR codes are designed to look real. One wrong click can cost you your passwords, your money or your personal information.</p>
+                </div>
+
+                <div class="problem-grid">
+                    <article class="ps-card ps-problem">
+                        <span class="ps-label">
+                            <svg class="icon"><use href="#i-shield-alert"/></svg>
+                            The Problem
+                        </span>
+                        <h3>It's hard to tell real from fake</h3>
+                        <ul class="ps-list">
+                            <li><svg class="icon"><use href="#i-x"/></svg>Phishing links copy the look of real brands and websites</li>
+                            <li><svg class="icon"><use href="#i-x"/></svg>QR codes hide where they really lead</li>
+                            <li><svg class="icon"><use href="#i-x"/></svg>Urgent messages pressure you to act before you think</li>
+                            <li><svg class="icon"><use href="#i-x"/></svg>Most people have no quick, simple way to check</li>
+                        </ul>
+                    </article>
+
+                    <article class="ps-card ps-solution">
+                        <span class="ps-label">
+                            <svg class="icon"><use href="#i-shield-check"/></svg>
+                            Our Solution
+                        </span>
+                        <h3>A quick second opinion, in your pocket</h3>
+                        <ul class="ps-list">
+                            <li><svg class="icon"><use href="#i-check"/></svg>Scan a link, QR code or screenshot in seconds</li>
+                            <li><svg class="icon"><use href="#i-check"/></svg>Get a clear risk level written in plain language</li>
+                            <li><svg class="icon"><use href="#i-check"/></svg>See why it's risky and compare it with the real thing</li>
+                            <li><svg class="icon"><use href="#i-check"/></svg>Follow step-by-step actions to stay safe</li>
+                        </ul>
+                    </article>
+                </div>
+
+                <div class="audience">
+                    <div class="audience-text">
+                        <h3>Built for everyday internet users</h3>
+                        <p>Unlike security tools made for IT experts, VeriGuard explains every result in plain language and tells you exactly what to do next.</p>
+                    </div>
+                    <ul class="audience-chips">
+                        <li><svg class="icon"><use href="#i-user"/></svg>Students</li>
+                        <li><svg class="icon"><use href="#i-users"/></svg>Families &amp; older adults</li>
+                        <li><svg class="icon"><use href="#i-link"/></svg>Online shoppers</li>
+                        <li><svg class="icon"><use href="#i-mail"/></svg>Anyone with suspicious messages</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ FEATURES ============ -->
+        <section class="section features-section" id="features">
+            <div class="container">
+                <div class="section-heading">
+                    <span class="eyebrow">Features</span>
+                    <h2>Everything you need to check <span class="text-gradient swoosh">before you click</span></h2>
+                    <p>One app to inspect suspicious content, understand the risk, and learn how to stay safe online.</p>
+                </div>
+
+                <div class="features-grid">
+                    <article class="feature-card">
+                        <div class="feature-icon"><svg class="icon"><use href="#i-link"/></svg></div>
+                        <h3>Link Scanning</h3>
+                        <p>Paste any URL and VeriGuard checks the domain, connection and wording for common phishing patterns.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon"><svg class="icon"><use href="#i-qr"/></svg></div>
+                        <h3>QR Code Scanning</h3>
+                        <p>See where a QR code really leads before you open it, so a sticker on a poster can't trick you.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon"><svg class="icon"><use href="#i-file"/></svg></div>
+                        <h3>File &amp; Screenshot Scanning</h3>
+                        <p>Upload a screenshot, image, PDF or DOCX that contains a suspicious message and get it analyzed.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon"><svg class="icon"><use href="#i-shield-alert"/></svg></div>
+                        <h3>Clear Risk Levels</h3>
+                        <p>Every result is labelled High Risk, Caution or Safe, with a short summary of what was found.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon"><svg class="icon"><use href="#i-list-check"/></svg></div>
+                        <h3>Recommended Actions</h3>
+                        <p>Step-by-step guidance on what to do next, from reporting the message to changing your password.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon"><svg class="icon"><use href="#i-book"/></svg></div>
+                        <h3>Knowledge Center</h3>
+                        <p>Short, practical guides on phishing, QR code safety and safe browsing habits.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ OUR PROTOTYPE (screenshots) ============ -->
+        <section class="section showcase-section" id="prototype">
+            <div class="container">
+                <div class="section-heading">
+                    <span class="eyebrow">Our Prototype</span>
+                    <h2>See the VeriGuard <span class="text-gradient swoosh">prototype</span> in action</h2>
+                    <p>Real screens from our working prototype. Pick a step to see how VeriGuard guides you.</p>                </div>
+
+                <!-- Tabs (styled like the tabs in the app). Without JavaScript, every panel simply shows. -->
+                <div class="proto-tabs" role="tablist" aria-label="Prototype steps">
+                    <button class="proto-tab" role="tab" type="button" id="tab-scan"    aria-controls="panel-scan"    aria-selected="true">1 &middot; Scan</button>
+                    <button class="proto-tab" role="tab" type="button" id="tab-result"  aria-controls="panel-result"  aria-selected="false" tabindex="-1">2 &middot; Result</button>
+                    <button class="proto-tab" role="tab" type="button" id="tab-details" aria-controls="panel-details" aria-selected="false" tabindex="-1">3 &middot; Details</button>
+                    <button class="proto-tab" role="tab" type="button" id="tab-act"     aria-controls="panel-act"     aria-selected="false" tabindex="-1">4 &middot; Act &amp; Learn</button>
+                    <button class="proto-tab" role="tab" type="button" id="tab-more"    aria-controls="panel-more"    aria-selected="false" tabindex="-1">More Screens</button>                </div>
+
+                <!-- Panel 1 -->
+                <div class="showcase-row" id="panel-scan" role="tabpanel" aria-labelledby="tab-scan">
+                    <div class="showcase-text">
+                        <h3>Scan anything in seconds</h3>
+                        <p>Choose what you want to check and VeriGuard does the rest. No technical knowledge needed.</p>
+                        <ul class="check-list">
+                            <li><svg class="icon"><use href="#i-check"/></svg>Paste a website link</li>
+                            <li><svg class="icon"><use href="#i-check"/></svg>Scan a QR code with your camera</li>
+                            <li><svg class="icon"><use href="#i-check"/></svg>Upload a file or screenshot</li>
+                        </ul>
+                    </div>
+                    <div class="showcase-phones">
+                        <figure class="phone"><img src="img/screens/choose-scan-type.png" alt="Choose Scan Type screen with URL, QR and File scan options" loading="lazy"></figure>
+                        <figure class="phone phone-offset"><img src="img/screens/enter-link-filled.png" alt="Enter Website Link screen with a suspicious link pasted in" loading="lazy"></figure>
+                    </div>
+                </div>
+
+                <!-- Panel 2 -->
+                <div class="showcase-row reverse" id="panel-result" role="tabpanel" aria-labelledby="tab-result">
+                    <div class="showcase-text">
+                        <h3>A clear verdict, not jargon</h3>
+                        <p>Results are colour-coded and written in plain language, so you know right away whether something is safe.</p>
+                        <ul class="check-list">
+                            <li><svg class="icon"><use href="#i-check"/></svg>High Risk, Caution or Low Concern at a glance</li>
+                            <li><svg class="icon"><use href="#i-check"/></svg>A short summary of every warning sign</li>
+                            <li><svg class="icon"><use href="#i-check"/></svg>Honest about limits: guidance, not a guarantee</li>
+                        </ul>
+                    </div>
+                    <div class="showcase-phones">
+                        <figure class="phone"><img src="img/screens/result-high-risk.png" alt="High Risk scan result with four warning signs" loading="lazy"></figure>
+                        <figure class="phone phone-offset"><img src="img/screens/result-low-concern.png" alt="Low Concern scan result with no warning indicators" loading="lazy"></figure>
+                    </div>
+                </div>
+
+                <!-- Panel 3 -->
+                <div class="showcase-row" id="panel-details" role="tabpanel" aria-labelledby="tab-details">
+                    <div class="showcase-text">
+                        <h3>See exactly why</h3>
+                        <p>Dig into the findings to understand what made a link suspicious, and compare it with what a legitimate one looks like.</p>
+                        <ul class="check-list">
+                            <li><svg class="icon"><use href="#i-check"/></svg>Threat type, risk level and detection basis</li>
+                            <li><svg class="icon"><use href="#i-check"/></svg>Side-by-side comparison with legitimate sources</li>
+                            <li><svg class="icon"><use href="#i-check"/></svg>Checks domain, connection, wording and login requests</li>
+                        </ul>
+                    </div>
+                    <div class="showcase-phones">
+                        <figure class="phone"><img src="img/screens/detailed-findings.png" alt="Detailed Findings screen listing URL, threat type, risk level and detection basis" loading="lazy"></figure>
+                        <figure class="phone phone-offset"><img src="img/screens/content-comparison.png" alt="Content Comparison screen comparing the submitted link with legitimate reference information" loading="lazy"></figure>
+                    </div>
+                </div>
+
+                <!-- Panel 4 -->
+                <div class="showcase-row reverse" id="panel-act" role="tabpanel" aria-labelledby="tab-act">
+                    <div class="showcase-text">
+                        <h3>Know what to do next</h3>
+                        <p>VeriGuard doesn't stop at a warning. It walks you through the right next steps and helps you spot scams on your own.</p>
+                        <ul class="check-list">
+                            <li><svg class="icon"><use href="#i-check"/></svg>Recommended actions for every risky result</li>
+                            <li><svg class="icon"><use href="#i-check"/></svg>Knowledge Center with easy safety guides</li>
+                            <li><svg class="icon"><use href="#i-check"/></svg>Scan history to review past checks</li>
+                        </ul>
+                    </div>
+                    <div class="showcase-phones">
+                        <figure class="phone"><img src="img/screens/recommended-actions.png" alt="Recommended Actions screen with five safety steps" loading="lazy"></figure>
+                        <figure class="phone phone-offset"><img src="img/screens/what-is-phishing.png" alt="What is Phishing article explaining the scam, warning signs and how to stay safe" loading="lazy"></figure>
+                    </div>
+                </div>
+
+                <!-- Panel 5: more screens -->
+                <div class="gallery" id="panel-more" role="tabpanel" aria-labelledby="tab-more">
+                    <div class="gallery-track" tabindex="0" aria-label="More app screens, scroll sideways">
+                        <figure class="phone"><img src="img/screens/login.png" alt="Login screen" loading="lazy"><figcaption>Sign In</figcaption></figure>
+                        <figure class="phone"><img src="img/screens/home.png" alt="Home screen with Scan and Verify and quick actions" loading="lazy"><figcaption>Home</figcaption></figure>
+                        <figure class="phone"><img src="img/screens/scan-qr.png" alt="Scan QR Code screen" loading="lazy"><figcaption>QR Scanner</figcaption></figure>
+                        <figure class="phone"><img src="img/screens/upload-file.png" alt="Upload File screen" loading="lazy"><figcaption>File Upload</figcaption></figure>
+                        <figure class="phone"><img src="img/screens/scan-history.png" alt="Scan History screen" loading="lazy"><figcaption>Scan History</figcaption></figure>
+                        <figure class="phone"><img src="img/screens/knowledge-center.png" alt="Knowledge Center screen" loading="lazy"><figcaption>Knowledge Center</figcaption></figure>
+                        <figure class="phone"><img src="img/screens/profile.png" alt="Profile screen" loading="lazy"><figcaption>Profile</figcaption></figure>
+                    </div>
+                </div>            </div>
+        </section>
+
+        <!-- ============ HOW IT WORKS ============ -->
+        <section class="section how-section" id="how-it-works">
+            <div class="container">
+                <div class="section-heading">
+                    <span class="eyebrow">How It Works</span>
+                    <h2>Three simple steps to a <span class="text-gradient swoosh">smarter decision</span></h2>
+                </div>
+
+                <ol class="steps">
+                    <li class="step-card">
+                        <span class="step-number">1</span>
+                        <div class="step-icon"><svg class="icon"><use href="#i-link"/></svg></div>
+                        <h3>Submit</h3>
+                        <p>Paste a link, scan a QR code, or upload a screenshot of a suspicious message.</p>
+                    </li>
+                    <li class="step-card">
+                        <span class="step-number">2</span>
+                        <div class="step-icon"><svg class="icon"><use href="#i-search"/></svg></div>
+                        <h3>Analyze</h3>
+                        <p>VeriGuard checks it against known phishing and scam indicators.</p>
+                    </li>
+                    <li class="step-card">
+                        <span class="step-number">3</span>
+                        <div class="step-icon"><svg class="icon"><use href="#i-shield-check"/></svg></div>
+                        <h3>Get Results</h3>
+                        <p>See whether it looks safe or like a scam, and what to do next.</p>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- ============ ABOUT US ============ -->
+        <section class="section about-section" id="about">
+            <!-- decorative background layers -->
+            <div class="about-bg" aria-hidden="true">
+                <span class="about-orb orb-1"></span>
+                <span class="about-orb orb-2"></span>
+                <span class="about-grid"></span>
+            </div>
+
+            <div class="container">
+                <!-- Company logo beside the heading -->
+                <div class="about-intro">
+                    <div class="company-logo">
+                        <img src="img/vericore-logo.jpg" alt="Vericore Solutions logo">
+                    </div>
+                    <div class="section-heading on-dark">
+                        <span class="eyebrow eyebrow-light">About Us</span>
+                        <h2>The team behind <span class="text-gradient-light swoosh swoosh-light">VeriGuard</span></h2>
+                        <p>
+                            We are <strong>Vericore Solutions</strong>. VeriGuard began as our capstone project, built around one
+                            simple question: how can everyday people tell whether a link, message or QR code is safe before they open it?
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Mission / Vision / Objectives -->
+                <div class="mvo-grid">
+                    <article class="mvo-card">
+                        <div class="mvo-icon"><svg class="icon"><use href="#i-target"/></svg></div>
+                        <h3>Our Mission</h3>
+                        <p>To help everyday internet users recognize and avoid phishing and online scams through simple, accessible verification tools and clear guidance.</p>
+                    </article>
+                    <article class="mvo-card">
+                        <div class="mvo-icon"><svg class="icon"><use href="#i-eye"/></svg></div>
+                        <h3>Our Vision</h3>
+                        <p>A digital world where everyone can browse, message and scan with confidence, and where no one falls for a scam because they couldn't tell it was fake.</p>
+                    </article>
+                    <article class="mvo-card mvo-objectives">
+                        <div class="mvo-icon"><svg class="icon"><use href="#i-flag"/></svg></div>
+                        <h3>Our Objectives</h3>
+                        <ol>
+                            <li>Help users identify suspicious messages, links, websites and QR codes.</li>
+                            <li>Present results in clear, easy-to-understand language.</li>
+                            <li>Raise awareness of phishing attacks and online scams.</li>
+                            <li>Encourage smarter, safer decisions online.</li>
+                        </ol>
+                    </article>
+                </div>
+
+                <!-- Team -->
+                <!-- Team: name, title, role -->
+                <div class="team">
+                    <h3 class="team-title">Meet the Team</h3>
+                    <ul class="team-grid">
+                        <li class="team-card">
+                            <span class="team-avatar"><img src="img/team/aldrien-booc.jpg" alt="Aldrien Allan N. Booc" loading="lazy"></span>
+                            <span class="team-info">
+                                <strong>Aldrien Allan N. Booc</strong>
+                                <small>Chief Technology Officer (CTO)</small>
+                                <small class="team-role">Programmer</small>
+                            </span>
+                        </li>
+                        <li class="team-card">
+                            <span class="team-avatar"><img src="img/team/precious-patol.png" alt="Precious Gabrielle P. Patol" loading="lazy"></span>
+                            <span class="team-info">
+                                <strong>Precious Gabrielle P. Patol</strong>
+                                <small>Chief Executive Officer (CEO)</small>
+                                <small class="team-role">Project Leader</small>
+                            </span>
+                        </li>
+                        <li class="team-card">
+                            <span class="team-avatar"><img src="img/team/chester-bunao.jpg" alt="Chester Brent D. Bunao" loading="lazy"></span>
+                            <span class="team-info">
+                                <strong>Chester Brent D. Bunao</strong>
+                                <small>Chief Design Officer (CDO)</small>
+                                <small class="team-role">UI/UX Designer</small>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ GET THE APP (call to action) ============ -->
+        <section class="section download-section" id="download">
+            <div class="container">
+                <div class="download-card">
+                    <div class="download-text">
+                        <span class="eyebrow eyebrow-light">Get the App</span>
+                        <h2>Get VeriGuard on your phone</h2>
+                        <p>
+                            Scan links, QR codes and files wherever you are.
+                            VeriGuard is available on the App Store and Google Play.
+                        </p>
+
+                        <div class="download-buttons">
+                            <a class="btn btn-white" href="#prototype">
+                                Explore Our Prototype
+                                <svg class="icon"><use href="#i-arrow"/></svg>
+                            </a>
+                            <a class="btn btn-ghost-light" href="#contact">Contact Us</a>
+                        </div>
+
+                        <!-- Store badges open the VeriGuard interactive prototype (prototype/index.html) in a new tab.
+                             When the app is published, replace each href with the real store link. -->
+                        <div class="store-badges">
+                            <a class="store-badge" href="prototype/index.html" target="_blank" rel="noopener" aria-label="App Store: open the VeriGuard prototype">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path fill="#fff" d="M16.4 12.6c0-2.5 2-3.7 2.1-3.8-1.2-1.7-3-1.9-3.6-2-1.5-.2-3 .9-3.8.9s-2-.9-3.3-.8C6.1 6.9 4.5 7.9 3.7 9.4c-1.8 3.1-.5 7.6 1.3 10.1.8 1.2 1.8 2.6 3.1 2.5 1.2-.1 1.7-.8 3.2-.8s1.9.8 3.2.8c1.3 0 2.2-1.2 3-2.4.9-1.4 1.3-2.7 1.3-2.8 0 0-2.6-1-2.6-4.2zM14 5.2c.7-.8 1.1-1.9 1-3-1 0-2.1.7-2.8 1.5-.6.7-1.2 1.8-1 2.9 1.1.1 2.1-.6 2.8-1.4z"/>
+                                </svg>
+                                <span><small>Download on the</small>App Store</span>
+                            </a>
+                            <a class="store-badge" href="prototype/index.html" target="_blank" rel="noopener" aria-label="Google Play: open the VeriGuard prototype">
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path fill="#4285F4" d="M3.6 20.7 13.1 12 3.6 3.2v17.5z"/>
+                                    <path fill="#34A853" d="M16.4 14.9 13.1 12 3.6 20.7l12.8-5.8z"/>
+                                    <path fill="#FBBC04" d="M20.6 10.7 16.4 9 13.1 12l3.3 2.9 4.2-1.9c.6-.3.6-1.2 0-1.5z"/>
+                                    <path fill="#EA4335" d="M3.6 3.2 13.1 12l3.3-3L3.6 3.2z"/>
+                                </svg>
+                                <span><small>Get it on</small>Google Play</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="download-phone">
+                        <figure class="phone"><img src="img/screens/login.png" alt="VeriGuard login screen" loading="lazy"></figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ CONTACT US ============ -->
+        <section class="section contact-section" id="contact">
+            <div class="container">
+                <div class="section-heading">
+                    <span class="eyebrow">Contact Us</span>
+                    <h2>Questions about <span class="text-gradient swoosh">VeriGuard?</span></h2>
+                    <p>We'd love to hear from you. Reach the team through Facebook, email or phone.</p>
+                </div>
+
+                <div class="contact-options">
+                    <a href="https://www.facebook.com/profile.php?id=61596093307968" target="_blank" rel="noopener noreferrer" class="contact-card">
+                        <span class="contact-icon">
+                            <img src="img/icons/facebook.png" alt="">
+                        </span>
+                        <span class="contact-text">
+                            <strong>Facebook</strong>
+                            <small>Message us on our page</small>
+                        </span>
+                        <svg class="icon contact-arrow"><use href="#i-arrow"/></svg>
+                    </a>
+                    <!-- Opens a new Gmail message in the browser (a plain mailto: link does nothing on computers without a mail app) -->
+                    <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=veriguardph@gmail.com" target="_blank" rel="noopener noreferrer" class="contact-card">
+                        <span class="contact-icon">
+                            <img src="img/icons/gmail.png" alt="">
+                        </span>
+                        <span class="contact-text">
+                            <strong>Email</strong>
+                            <small>veriguardph@gmail.com</small>
+                        </span>
+                        <svg class="icon contact-arrow"><use href="#i-arrow"/></svg>
+                    </a>
+                    <!-- tel: link opens the dialer on phones (and calling apps on computers) -->
+                    <a href="tel:+639694507602" class="contact-card">
+                        <span class="contact-icon contact-icon-phone">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
+                        </span>
+                        <span class="contact-text">
+                            <strong>Phone</strong>
+                            <small>0969 450 7602</small>
+                        </span>
+                        <svg class="icon contact-arrow"><use href="#i-arrow"/></svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="site-footer">
+        <div class="footer-container container">
+            <div class="footer-brand">
+                <a href="#home" class="logo logo-light">
+                    <img src="img/logo.png" alt="" class="logo-image">
+                    <span class="logo-text">Veri<span>Guard</span></span>
+                </a>
+                <p class="footer-tagline">Scan. Verify. Stay safe.</p>
+                <p>Think before you click. Verify messages, links and QR codes to stay safe from scams and online threats.</p>
+            </div>
+
+            <div class="footer-col">
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#prototype">Our Prototype</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#promo-video">Promotional Video</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom container">
+            <p>&copy; 2026 VeriGuard by Vericore Solutions. All rights reserved. VeriGuard offers guidance based on pattern checks. It is not a guarantee of safety.</p>
+            <p class="credits">
+                Credits: <a href="https://fonts.google.com/specimen/Inter" target="_blank" rel="noopener noreferrer">Inter</a> font (SIL Open Font License) &middot;
+                Icons adapted from <a href="https://lucide.dev" target="_blank" rel="noopener noreferrer">Lucide</a> (ISC License) &middot;
+                Facebook logo is a trademark of Meta Platforms, Inc. &middot; Gmail and Google Play are trademarks of Google LLC. &middot; App Store is a trademark of Apple Inc.
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

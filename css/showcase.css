@@ -1,0 +1,171 @@
+/* =====================================================
+   OUR PROTOTYPE (tabbed screenshot showcase)
+===================================================== */
+
+.showcase-section {
+    background: linear-gradient(180deg, var(--bg) 0%, var(--blue-50) 100%);
+}
+
+/* ---------- Tabs (same style as the tabs in the app) ---------- */
+.proto-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto clamp(20px, 3.5vh, 40px);
+    padding: 5px;
+    border-radius: 999px;
+    background: var(--blue-100);
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.proto-tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.proto-tab {
+    flex-shrink: 0;
+    padding: 10px 20px;
+    border: 0;
+    border-radius: 999px;
+    font: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    white-space: nowrap;
+    color: var(--navy);
+    background: transparent;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.proto-tab:hover {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.proto-tab[aria-selected="true"] {
+    color: var(--white);
+    background: var(--blue);
+    box-shadow: 0 6px 16px rgba(31, 111, 229, 0.35);
+}
+
+/* ---------- Panels ---------- */
+.showcase-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 64px;
+    animation: panel-in 0.35s ease;
+}
+
+.showcase-row.reverse .showcase-text {
+    order: 2;
+}
+
+/* without JavaScript all panels show, so space them out */
+.showcase-row + .showcase-row,
+.showcase-row + .gallery {
+    margin-top: 48px;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+@keyframes panel-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: none; }
+}
+
+.showcase-text {
+    max-width: 480px;
+}
+
+.showcase-text h3 {
+    margin-bottom: 12px;
+    font-size: clamp(24px, min(3vw, 4.4vh), 34px);
+    font-weight: 800;
+}
+
+.showcase-text p {
+    margin-bottom: clamp(16px, 3vh, 26px);
+    font-size: 17px;
+}
+
+.showcase-phones {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+}
+
+.showcase-phones .phone {
+    --w: 230px;
+    transform: rotate(-3deg);
+    transition: transform 0.4s ease;
+}
+
+.showcase-phones .phone-offset {
+    transform: rotate(3deg) translateY(24px);
+}
+
+.showcase-phones .phone:hover {
+    transform: rotate(0deg) translateY(-6px);
+}
+
+/* ---------- More screens (panel 5) ---------- */
+.gallery {
+    animation: panel-in 0.35s ease;
+}
+
+.gallery-track {
+    display: flex;
+    gap: 22px;
+    padding: 8px 8px 8px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+    scrollbar-color: #b8d1f7 transparent;
+}
+
+/* center the row when it fits, but keep the first phone reachable when it scrolls */
+.gallery-track > :first-child {
+    margin-left: auto;
+}
+
+.gallery-track > :last-child {
+    margin-right: auto;
+}
+
+.gallery-track .phone {
+    --w: 165px;
+    margin-bottom: 30px;
+    scroll-snap-align: center;
+    box-shadow: var(--shadow);
+}
+
+.gallery-track figcaption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -30px;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+}
+
+/* ---------- Computers: size phones to fit the screen height ---------- */
+@media screen and (min-width: 981px) {
+    .showcase-phones .phone {
+        --w: clamp(140px, calc((100vh - 380px) / 2.3), 240px);
+        --w: clamp(140px, calc((100svh - 380px) / 2.3), 240px);
+    }
+
+    .gallery-track .phone {
+        --w: clamp(120px, calc((100vh - 420px) / 2.3), 170px);
+        --w: clamp(120px, calc((100svh - 420px) / 2.3), 170px);
+    }
+}

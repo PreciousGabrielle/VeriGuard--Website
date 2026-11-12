@@ -1,0 +1,154 @@
+/* =====================================================
+   PROBLEM & SOLUTION
+===================================================== */
+
+.problem-section {
+    background: var(--white);
+}
+
+/* cards sit at a slight angle, and straighten on hover */
+.ps-problem  { transform: rotate(-1deg); }
+.ps-solution { transform: rotate(1deg); }
+
+.ps-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ps-card:hover {
+    transform: rotate(0deg) translateY(-4px);
+    box-shadow: var(--shadow);
+}
+
+.problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.ps-card {
+    padding: clamp(16px, 2.6vh, 36px) 32px;
+    border-radius: 24px;
+    border: 1px solid var(--border);
+}
+
+.ps-problem {
+    background: linear-gradient(180deg, #fff6f7 0%, #ffffff 100%);
+    border-color: #f6d3d9;
+}
+
+.ps-solution {
+    background: linear-gradient(180deg, var(--blue-50) 0%, #ffffff 100%);
+    border-color: #c9dbf8;
+}
+
+.ps-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.ps-problem .ps-label {
+    color: var(--danger);
+    background: var(--danger-bg);
+}
+
+.ps-solution .ps-label {
+    color: var(--blue-dark);
+    background: var(--blue-100);
+}
+
+.ps-label .icon {
+    width: 16px;
+    height: 16px;
+}
+
+.ps-card h3 {
+    margin: clamp(8px, 1.4vh, 18px) 0 clamp(10px, 1.6vh, 20px);
+    font-size: clamp(20px, 3.2vh, 24px);
+    font-weight: 800;
+}
+
+.ps-list {
+    display: grid;
+    gap: clamp(6px, 1.1vh, 14px);
+}
+
+.ps-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    color: var(--navy);
+    font-weight: 500;
+}
+
+.ps-list .icon {
+    width: 22px;
+    height: 22px;
+    padding: 4px;
+    margin-top: 1px;
+    border-radius: 50%;
+    stroke-width: 3;
+    color: var(--white);
+}
+
+.ps-problem .ps-list .icon {
+    background: var(--danger);
+}
+
+.ps-solution .ps-list .icon {
+    background: var(--blue);
+}
+
+/* ---------- Target users ---------- */
+.audience {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    align-items: center;
+    gap: 32px;
+    margin-top: clamp(12px, 2vh, 24px);
+    padding: clamp(14px, 2.2vh, 32px) 32px;
+    border-radius: 24px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+}
+
+.audience-text h3 {
+    margin-bottom: 4px;
+    font-size: clamp(18px, 3vh, 22px);
+    font-weight: 800;
+}
+
+.audience-text p {
+    font-size: 15px;
+}
+
+.audience-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.audience-chips li {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+    background: var(--white);
+    border: 1px solid var(--border);
+}
+
+.audience-chips .icon {
+    width: 18px;
+    height: 18px;
+    color: var(--blue);
+}

@@ -1,0 +1,74 @@
+/* =====================================================
+   HOW IT WORKS
+===================================================== */
+
+.how-section {
+    background: var(--white);
+}
+
+.steps {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    counter-reset: none;
+}
+
+/* dashed line connecting the three steps */
+.steps::before {
+    content: "";
+    position: absolute;
+    top: 28px;
+    left: 16%;
+    right: 16%;
+    border-top: 2px dashed #b8d1f7;
+}
+
+.step-card {
+    position: relative;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.step-number {
+    position: relative;
+    z-index: 1;
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 24px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--white);
+    background: var(--gradient);
+    box-shadow: 0 0 0 8px var(--white), 0 10px 24px rgba(31, 111, 229, 0.3);
+}
+
+.step-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 14px;
+    display: grid;
+    place-items: center;
+    border-radius: 14px;
+    color: var(--blue);
+    background: var(--blue-50);
+}
+
+.step-icon .icon {
+    width: 24px;
+    height: 24px;
+}
+
+.step-card h3 {
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.step-card p {
+    max-width: 280px;
+    margin: 0 auto;
+    color: var(--muted);
+}

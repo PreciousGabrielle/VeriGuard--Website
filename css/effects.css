@@ -1,0 +1,27 @@
+/* =====================================================
+   TEXT ACCENTS
+   Hand-drawn curved underline under highlighted words
+   in headings, e.g. <span class="text-gradient swoosh">.
+===================================================== */
+
+.swoosh {
+    position: relative;
+    display: inline-block;
+    white-space: nowrap;
+    padding-bottom: 0.06em;
+}
+
+.swoosh::after {
+    content: "";
+    position: absolute;
+    left: -2%;
+    right: -2%;
+    bottom: -0.16em;
+    height: 0.3em;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20' preserveAspectRatio='none'%3E%3Cpath d='M3 14 C 50 4, 120 1, 197 9' fill='none' stroke='%233d8bf5' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+}
+
+/* lighter underline for dark backgrounds */
+.swoosh.swoosh-light::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20' preserveAspectRatio='none'%3E%3Cpath d='M3 14 C 50 4, 120 1, 197 9' fill='none' stroke='%236aa8ff' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E");
+}
