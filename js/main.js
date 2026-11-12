@@ -1,6 +1,6 @@
 // =====================================================
 // VERIGUARD WEBSITE
-// 1. Hero video: sound on/off button
+// 1. Hero video: sound on/off + fullscreen buttons
 // 2. Mobile menu: opens/closes the navbar on small screens
 // 3. Prototype tabs: shows one prototype step at a time
 // =====================================================
@@ -15,13 +15,47 @@ document.addEventListener("DOMContentLoaded", function () {
     var p = video.play();
     if (p && p.catch) p.catch(function () { /* autoplay blocked: poster stays */ });
 
-    button.addEventListener("click", function () {
-        video.muted = !video.muted;
-        if (!video.muted) video.play();
+    // keep the sound button in sync (also when muted via the fullscreen controls)
+    function syncSound() {
         button.classList.toggle("is-on", !video.muted);
         button.setAttribute("aria-pressed", String(!video.muted));
         button.setAttribute("aria-label", video.muted ? "Turn sound on" : "Turn sound off");
+    }
+    video.addEventListener("volumechange", syncSound);
+
+    button.addEventListener("click", function () {
+        video.muted = !video.muted;
+        if (!video.muted) video.play();
     });
+
+    // ---------- Fullscreen button (double-clicking the video works too) ----------
+    var fsButton = document.querySelector(".fullscreen-toggle");
+
+    function isFullscreen() {
+        return (document.fullscreenElement || document.webkitFullscreenElement) === video;
+    }
+
+    function openFullscreen() {
+        video.controls = true;   // show the normal player controls while fullscreen
+        video.muted = false;     // watching fullscreen = watching with sound
+        video.play();
+        if (video.requestFullscreen) video.requestFullscreen();
+        else if (video.webkitRequestFullscreen) video.webkitRequestFullscreen();
+        else if (video.webkitEnterFullscreen) video.webkitEnterFullscreen(); // iPhone
+    }
+
+    function onFullscreenExit() {
+        if (isFullscreen()) return;
+        video.controls = false;  // back to the clean autoplay look
+        video.play();            // keep looping in the hero
+    }
+
+    document.addEventListener("fullscreenchange", onFullscreenExit);
+    document.addEventListener("webkitfullscreenchange", onFullscreenExit);
+    video.addEventListener("webkitendfullscreen", onFullscreenExit); // iPhone
+
+    if (fsButton) fsButton.addEventListener("click", openFullscreen);
+    video.addEventListener("dblclick", openFullscreen);
 });
 
 // ---------- 3. Prototype tabs ----------

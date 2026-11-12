@@ -174,8 +174,9 @@
     background: #050d22;
 }
 
-/* ---------- Sound button on the video ---------- */
-.sound-toggle {
+/* ---------- Sound + fullscreen buttons on the video ---------- */
+.sound-toggle,
+.fullscreen-toggle {
     position: absolute;
     right: 18px;
     bottom: 18px;
@@ -193,7 +194,12 @@
     transition: background 0.2s ease, transform 0.2s ease;
 }
 
-.sound-toggle:hover {
+.fullscreen-toggle {
+    right: 70px;
+}
+
+.sound-toggle:hover,
+.fullscreen-toggle:hover {
     background: var(--blue);
     transform: scale(1.06);
 }

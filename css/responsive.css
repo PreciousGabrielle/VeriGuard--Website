@@ -220,11 +220,16 @@
         border-radius: 13px;
     }
 
-    .sound-toggle {
+    .sound-toggle,
+    .fullscreen-toggle {
         right: 10px;
         bottom: 10px;
         width: 36px;
         height: 36px;
+    }
+
+    .fullscreen-toggle {
+        right: 54px;
     }
 
     .features-grid {
