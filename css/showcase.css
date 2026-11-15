@@ -9,7 +9,10 @@
 /* ---------- Tabs (same style as the tabs in the app) ---------- */
 .proto-tabs {
     display: flex;
-    justify-content: center;
+    /* start-aligned (not centered) so the first tab is never cut off
+       when the bar scrolls sideways on phones; the bar itself is
+       still centered by margin: auto below */
+    justify-content: flex-start;
     gap: 4px;
     width: fit-content;
     max-width: 100%;
