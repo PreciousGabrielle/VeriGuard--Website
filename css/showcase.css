@@ -9,10 +9,10 @@
 /* ---------- Tabs (same style as the tabs in the app) ---------- */
 .proto-tabs {
     display: flex;
-    /* tabs wrap onto a second line on narrow screens instead of
-       scrolling sideways, so no tab (e.g. "1 · Scan") is ever cut off */
-    flex-wrap: wrap;
-    justify-content: center;
+    /* start-aligned (not centered) so the first tab is never cut off
+       when the bar scrolls sideways on phones; the bar itself is
+       still centered by margin: auto below */
+    justify-content: flex-start;
     gap: 4px;
     width: fit-content;
     max-width: 100%;
@@ -20,6 +20,12 @@
     padding: 5px;
     border-radius: 999px;
     background: var(--blue-100);
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.proto-tabs::-webkit-scrollbar {
+    display: none;
 }
 
 .proto-tab {

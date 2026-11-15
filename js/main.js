@@ -74,6 +74,16 @@ document.addEventListener("DOMContentLoaded", function () {
             if (!on) panel.querySelectorAll("video").forEach(function (v) { v.pause(); });
         });
         if (focus) tab.focus();
+
+        // on phones the tab bar scrolls sideways: slide it so the chosen
+        // tab is fully visible (moves only the bar, never the page)
+        var bar = tab.parentElement;
+        if (bar.scrollWidth > bar.clientWidth) {
+            var left = tab.offsetLeft - bar.offsetLeft - 5;
+            var right = left + tab.offsetWidth + 10;
+            if (left < bar.scrollLeft) bar.scrollLeft = left;
+            else if (right > bar.scrollLeft + bar.clientWidth) bar.scrollLeft = right - bar.clientWidth;
+        }
     }
 
     tabs.forEach(function (tab, i) {
@@ -90,6 +100,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // show only the first panel once JavaScript is running
     select(tabs[0], false);
+
+    // always start the tab bar at the far left so "1 · Scan" is visible
+    var tabBar = tabs[0].parentElement;
+    tabBar.scrollLeft = 0;
+    window.addEventListener("load", function () { tabBar.scrollLeft = 0; });
 });
 
 // ---------- 2. Mobile menu ----------

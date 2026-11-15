@@ -244,11 +244,6 @@
         --w: min(42vw, 200px);
     }
 
-    /* when the tabs wrap to two lines, a full pill shape looks odd */
-    .proto-tabs {
-        border-radius: 22px;
-    }
-
     .proto-tab {
         padding: 9px 14px;
         font-size: 14px;
