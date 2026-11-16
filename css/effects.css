@@ -1022,3 +1022,126 @@ button:focus:not(:focus-visible),
         0 0 34px rgba(255, 150, 170, 0.6),
         0 18px 40px rgba(2, 12, 48, 0.3);
 }
+
+/* =====================================================
+   MOBILE MENU (phones + tablets, <= 1180px)
+   A solid rounded glass panel floating under the menu bar,
+   the page dimmed behind it, links with icon tiles and a
+   white "Download Here" button. Tap outside to close.
+===================================================== */
+
+.nav-icon {
+    display: none;
+}
+
+@media screen and (max-width: 1180px) {
+
+    .site-header .nav-menu {
+        top: calc(var(--header-h) + 10px);
+        left: 12px;
+        right: 12px;
+        gap: 12px;
+        padding: 10px 10px 14px;
+        border-radius: 24px;
+        background: linear-gradient(180deg, rgba(14, 40, 140, 0.97) 0%, rgba(6, 22, 90, 0.98) 100%);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 24px 60px rgba(0, 0, 0, 0.5);
+        max-height: calc(100vh - var(--header-h) - 24px);
+        max-height: calc(100svh - var(--header-h) - 24px);
+        overflow-y: auto;
+    }
+
+    .site-header.nav-open .nav-menu {
+        animation: menu-drop 0.28s cubic-bezier(0.22, 0.9, 0.3, 1);
+    }
+
+    .site-header .nav-links {
+        gap: 2px;
+    }
+
+    .site-header .nav-links a {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 10px 12px;
+        border: 0;
+        border-radius: 14px;
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        text-transform: none;
+        color: #ffffff;
+        transition: background 0.2s ease;
+    }
+
+    .site-header .nav-links a:hover,
+    .site-header .nav-links a:active,
+    .site-header .nav-links a:focus-visible {
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-icon {
+        flex: none;
+        width: 36px;
+        height: 36px;
+        display: grid;
+        place-items: center;
+        border-radius: 11px;
+        color: #ffffff;
+        background: linear-gradient(135deg, #3d8bf5 0%, #1556c4 100%);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 4px 10px rgba(0, 0, 0, 0.25);
+    }
+
+    .nav-icon .icon {
+        width: 18px;
+        height: 18px;
+    }
+
+    /* "Download Here": solid white button */
+    .site-header .nav-menu .btn-primary {
+        min-height: 50px;
+        margin: 4px 2px 0;
+        color: #0b2c8a;
+        background: #ffffff;
+        border: 0;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    @keyframes menu-drop {
+        from { transform: translateY(-10px) scale(0.98); }
+        to   { transform: none; }
+    }
+
+    @keyframes menu-fade {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .site-header.nav-open .nav-menu {
+        animation: none;
+    }
+}
+
+/* page dimmed behind the open mobile menu (on the page, not inside the
+   blurred menu bar, which would trap it) */
+@media screen and (max-width: 1180px) {
+    body.menu-open::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 90;              /* above the page, below the menu bar (100) */
+        background: rgba(2, 8, 30, 0.6);
+        -webkit-backdrop-filter: blur(4px);
+        backdrop-filter: blur(4px);
+        animation: menu-fade 0.25s ease;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body.menu-open::after {
+        animation: none;
+    }
+}

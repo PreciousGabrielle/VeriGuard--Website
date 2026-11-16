@@ -230,6 +230,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function setOpen(open) {
         header.classList.toggle("nav-open", open);
+        document.body.classList.toggle("menu-open", open);   // dims the page behind the menu
         toggle.setAttribute("aria-expanded", String(open));
         toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
     }
@@ -246,5 +247,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.addEventListener("keydown", function (event) {
         if (event.key === "Escape") setOpen(false);
+    });
+
+    // tap anywhere outside the menu (on the dimmed page) to close it
+    document.addEventListener("click", function (event) {
+        if (header.classList.contains("nav-open") && !menu.contains(event.target) && !toggle.contains(event.target)) setOpen(false);
     });
 });
