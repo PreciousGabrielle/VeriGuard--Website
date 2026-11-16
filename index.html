@@ -13,21 +13,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Styles: base first, then one file per section, responsive last -->
-    <link rel="stylesheet" href="css/style.css?v=4">
-    <link rel="stylesheet" href="css/navbar.css?v=4">
-    <link rel="stylesheet" href="css/home.css?v=4">
-    <link rel="stylesheet" href="css/problem.css?v=4">
-    <link rel="stylesheet" href="css/features.css?v=4">
-    <link rel="stylesheet" href="css/showcase.css?v=4">
-    <link rel="stylesheet" href="css/how-it-work.css?v=4">
-    <link rel="stylesheet" href="css/about.css?v=4">
-    <link rel="stylesheet" href="css/download.css?v=4">
-    <link rel="stylesheet" href="css/contact.css?v=4">
-    <link rel="stylesheet" href="css/footer.css?v=4">
-    <link rel="stylesheet" href="css/effects.css?v=4">
-    <link rel="stylesheet" href="css/responsive.css?v=4">
+    <link rel="stylesheet" href="css/style.css?v=10">
+    <link rel="stylesheet" href="css/navbar.css?v=10">
+    <link rel="stylesheet" href="css/home.css?v=13">
+    <link rel="stylesheet" href="css/problem.css?v=10">
+    <link rel="stylesheet" href="css/features.css?v=10">
+    <link rel="stylesheet" href="css/showcase.css?v=10">
+    <link rel="stylesheet" href="css/how-it-work.css?v=13">
+    <link rel="stylesheet" href="css/pricing.css?v=10">
+    <link rel="stylesheet" href="css/about.css?v=10">
+    <link rel="stylesheet" href="css/download.css?v=10">
+    <link rel="stylesheet" href="css/contact.css?v=10">
+    <link rel="stylesheet" href="css/footer.css?v=10">
+    <link rel="stylesheet" href="css/effects.css?v=62">
+    <link rel="stylesheet" href="css/responsive.css?v=10">
 
-    <script src="js/main.js?v=4" defer></script>
+    <script src="js/main.js?v=20" defer></script>
 </head>
 
 <body>
@@ -75,6 +76,7 @@
                     <li><a href="#features">Features</a></li>
                     <li><a href="#prototype">Prototype</a></li>
                     <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
                     <li><a href="#about">About Us</a></li>
                     <li><a href="#contact">Contact Us</a></li>
                 </ul>
@@ -117,6 +119,18 @@
                 <!-- Promo video: autoplays muted on loop (browsers only allow muted autoplay) -->
                 <div class="hero-visual" id="promo-video">
                     <div class="hero-glow"></div>
+
+                    <!-- glowing logo badge above the video: VeriGuard by Vericore Solutions -->
+                    <div class="hero-logos">
+                        <span class="hero-logo-veriguard">
+                            <img src="img/logo.png" alt="VeriGuard logo">
+                            <span class="logo-text">Veri<span>Guard</span></span>
+                        </span>
+                        <span class="hero-logo-vericore">
+                            <img src="img/vericore-emblem.png" alt="Vericore Solutions logo">
+                            <span class="vericore-text">Vericore<small>Solutions</small></span>
+                        </span>
+                    </div>
 
                     <div class="scan-frame">
                         <!-- scanner corner brackets, like the QR scanner in the app -->
@@ -248,96 +262,42 @@
                 <div class="section-heading">
                     <span class="eyebrow">Our Prototype</span>
                     <h2>See the VeriGuard <span class="text-gradient swoosh">prototype</span> in action</h2>
-                    <p>Real screens from our working prototype. Pick a step to see how VeriGuard guides you.</p>                </div>
-
-                <!-- Tabs (styled like the tabs in the app). Without JavaScript, every panel simply shows. -->
-                <div class="proto-tabs" role="tablist" aria-label="Prototype steps">
-                    <button class="proto-tab" role="tab" type="button" id="tab-scan"    aria-controls="panel-scan"    aria-selected="true">1 &middot; Scan</button>
-                    <button class="proto-tab" role="tab" type="button" id="tab-result"  aria-controls="panel-result"  aria-selected="false" tabindex="-1">2 &middot; Result</button>
-                    <button class="proto-tab" role="tab" type="button" id="tab-details" aria-controls="panel-details" aria-selected="false" tabindex="-1">3 &middot; Details</button>
-                    <button class="proto-tab" role="tab" type="button" id="tab-act"     aria-controls="panel-act"     aria-selected="false" tabindex="-1">4 &middot; Act &amp; Learn</button>
-                    <button class="proto-tab" role="tab" type="button" id="tab-more"    aria-controls="panel-more"    aria-selected="false" tabindex="-1">More Screens</button>                </div>
-
-                <!-- Panel 1 -->
-                <div class="showcase-row" id="panel-scan" role="tabpanel" aria-labelledby="tab-scan">
-                    <div class="showcase-text">
-                        <h3>Scan anything in seconds</h3>
-                        <p>Choose what you want to check and VeriGuard does the rest. No technical knowledge needed.</p>
-                        <ul class="check-list">
-                            <li><svg class="icon"><use href="#i-check"/></svg>Paste a website link</li>
-                            <li><svg class="icon"><use href="#i-check"/></svg>Scan a QR code with your camera</li>
-                            <li><svg class="icon"><use href="#i-check"/></svg>Upload a file or screenshot</li>
-                        </ul>
-                    </div>
-                    <div class="showcase-phones">
-                        <figure class="phone"><img src="img/screens/choose-scan-type.png" alt="Choose Scan Type screen with URL, QR and File scan options" loading="lazy"></figure>
-                        <figure class="phone phone-offset"><img src="img/screens/enter-link-filled.png" alt="Enter Website Link screen with a suspicious link pasted in" loading="lazy"></figure>
-                    </div>
+                    <p>Real screens from our working prototype. Swipe or use the arrows to browse them.</p>
                 </div>
 
-                <!-- Panel 2 -->
-                <div class="showcase-row reverse" id="panel-result" role="tabpanel" aria-labelledby="tab-result">
-                    <div class="showcase-text">
-                        <h3>A clear verdict, not jargon</h3>
-                        <p>Results are colour-coded and written in plain language, so you know right away whether something is safe.</p>
-                        <ul class="check-list">
-                            <li><svg class="icon"><use href="#i-check"/></svg>High Risk, Caution or Low Concern at a glance</li>
-                            <li><svg class="icon"><use href="#i-check"/></svg>A short summary of every warning sign</li>
-                            <li><svg class="icon"><use href="#i-check"/></svg>Honest about limits: guidance, not a guarantee</li>
-                        </ul>
+                <!-- Screen carousel: the chosen screen sits large in the centre, neighbours shrink to the sides.
+                     Without JavaScript it is a simple sideways-scrolling row. -->
+                <div class="proto-carousel" aria-roledescription="carousel" aria-label="VeriGuard prototype screens">
+                    <button class="carousel-arrow carousel-prev" type="button" aria-label="Previous screen">
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+                    </button>
+
+                    <div class="carousel-stage" tabindex="0" aria-label="Prototype screens, use the left and right arrow keys">
+                        <figure class="screen-card" data-desc="Log in to your VeriGuard account to keep your scan history safe."><img src="img/screens/login.png" alt="Login screen" loading="lazy"><figcaption><small>Start</small>Sign In</figcaption></figure>
+                        <figure class="screen-card" data-desc="Scan and Verify sits front and centre, with quick shortcuts to every tool."><img src="img/screens/home.png" alt="Home screen with Scan and Verify and quick actions" loading="lazy"><figcaption><small>Start</small>Home</figcaption></figure>
+                        <figure class="screen-card" data-desc="Pick what you want to check: a website link, a QR code or a file."><img src="img/screens/choose-scan-type.png" alt="Choose Scan Type screen with URL, QR and File scan options" loading="lazy"><figcaption><small>1 &middot; Scan</small>Choose a Scan</figcaption></figure>
+                        <figure class="screen-card" data-desc="Paste a suspicious link and VeriGuard checks it in seconds."><img src="img/screens/enter-link-filled.png" alt="Enter Website Link screen with a suspicious link pasted in" loading="lazy"><figcaption><small>1 &middot; Scan</small>Paste a Link</figcaption></figure>
+                        <figure class="screen-card" data-desc="Point your camera at a QR code to see where it really leads."><img src="img/screens/scan-qr.png" alt="Scan QR Code screen" loading="lazy"><figcaption><small>1 &middot; Scan</small>QR Scanner</figcaption></figure>
+                        <figure class="screen-card" data-desc="Upload a screenshot, image, PDF or DOCX of a suspicious message."><img src="img/screens/upload-file.png" alt="Upload File screen" loading="lazy"><figcaption><small>1 &middot; Scan</small>File Upload</figcaption></figure>
+                        <figure class="screen-card" data-desc="A clear, colour-coded verdict with a short summary of every warning sign."><img src="img/screens/result-high-risk.png" alt="High Risk scan result with four warning signs" loading="lazy"><figcaption><small>2 &middot; Result</small>High Risk</figcaption></figure>
+                        <figure class="screen-card" data-desc="When nothing looks wrong, VeriGuard says so, honestly, as guidance and not a guarantee."><img src="img/screens/result-low-concern.png" alt="Low Concern scan result with no warning indicators" loading="lazy"><figcaption><small>2 &middot; Result</small>Low Concern</figcaption></figure>
+                        <figure class="screen-card" data-desc="Threat type, risk level and the exact signs that made it suspicious."><img src="img/screens/detailed-findings.png" alt="Detailed Findings screen listing URL, threat type, risk level and detection basis" loading="lazy"><figcaption><small>3 &middot; Details</small>Detailed Findings</figcaption></figure>
+                        <figure class="screen-card" data-desc="Compare the link side by side with what the legitimate one looks like."><img src="img/screens/content-comparison.png" alt="Content Comparison screen comparing the submitted link with legitimate reference information" loading="lazy"><figcaption><small>3 &middot; Details</small>Comparison</figcaption></figure>
+                        <figure class="screen-card" data-desc="Step-by-step actions to stay safe after a risky result."><img src="img/screens/recommended-actions.png" alt="Recommended Actions screen with five safety steps" loading="lazy"><figcaption><small>4 &middot; Act</small>Next Steps</figcaption></figure>
+                        <figure class="screen-card" data-desc="Easy guides that explain phishing, its warning signs and how to avoid it."><img src="img/screens/what-is-phishing.png" alt="What is Phishing article explaining the scam, warning signs and how to stay safe" loading="lazy"><figcaption><small>4 &middot; Learn</small>What is Phishing</figcaption></figure>
+                        <figure class="screen-card" data-desc="Short, practical safety guides on phishing, QR codes and safe browsing."><img src="img/screens/knowledge-center.png" alt="Knowledge Center screen" loading="lazy"><figcaption><small>4 &middot; Learn</small>Knowledge Center</figcaption></figure>
+                        <figure class="screen-card" data-desc="Look back at everything you've checked."><img src="img/screens/scan-history.png" alt="Scan History screen" loading="lazy"><figcaption><small>More</small>Scan History</figcaption></figure>
+                        <figure class="screen-card" data-desc="Manage your account and app settings."><img src="img/screens/profile.png" alt="Profile screen" loading="lazy"><figcaption><small>More</small>Profile</figcaption></figure>
                     </div>
-                    <div class="showcase-phones">
-                        <figure class="phone"><img src="img/screens/result-high-risk.png" alt="High Risk scan result with four warning signs" loading="lazy"></figure>
-                        <figure class="phone phone-offset"><img src="img/screens/result-low-concern.png" alt="Low Concern scan result with no warning indicators" loading="lazy"></figure>
-                    </div>
+
+                    <button class="carousel-arrow carousel-next" type="button" aria-label="Next screen">
+                        <svg class="icon" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>
+                    </button>
                 </div>
 
-                <!-- Panel 3 -->
-                <div class="showcase-row" id="panel-details" role="tabpanel" aria-labelledby="tab-details">
-                    <div class="showcase-text">
-                        <h3>See exactly why</h3>
-                        <p>Dig into the findings to understand what made a link suspicious, and compare it with what a legitimate one looks like.</p>
-                        <ul class="check-list">
-                            <li><svg class="icon"><use href="#i-check"/></svg>Threat type, risk level and detection basis</li>
-                            <li><svg class="icon"><use href="#i-check"/></svg>Side-by-side comparison with legitimate sources</li>
-                            <li><svg class="icon"><use href="#i-check"/></svg>Checks domain, connection, wording and login requests</li>
-                        </ul>
-                    </div>
-                    <div class="showcase-phones">
-                        <figure class="phone"><img src="img/screens/detailed-findings.png" alt="Detailed Findings screen listing URL, threat type, risk level and detection basis" loading="lazy"></figure>
-                        <figure class="phone phone-offset"><img src="img/screens/content-comparison.png" alt="Content Comparison screen comparing the submitted link with legitimate reference information" loading="lazy"></figure>
-                    </div>
-                </div>
-
-                <!-- Panel 4 -->
-                <div class="showcase-row reverse" id="panel-act" role="tabpanel" aria-labelledby="tab-act">
-                    <div class="showcase-text">
-                        <h3>Know what to do next</h3>
-                        <p>VeriGuard doesn't stop at a warning. It walks you through the right next steps and helps you spot scams on your own.</p>
-                        <ul class="check-list">
-                            <li><svg class="icon"><use href="#i-check"/></svg>Recommended actions for every risky result</li>
-                            <li><svg class="icon"><use href="#i-check"/></svg>Knowledge Center with easy safety guides</li>
-                            <li><svg class="icon"><use href="#i-check"/></svg>Scan history to review past checks</li>
-                        </ul>
-                    </div>
-                    <div class="showcase-phones">
-                        <figure class="phone"><img src="img/screens/recommended-actions.png" alt="Recommended Actions screen with five safety steps" loading="lazy"></figure>
-                        <figure class="phone phone-offset"><img src="img/screens/what-is-phishing.png" alt="What is Phishing article explaining the scam, warning signs and how to stay safe" loading="lazy"></figure>
-                    </div>
-                </div>
-
-                <!-- Panel 5: more screens -->
-                <div class="gallery" id="panel-more" role="tabpanel" aria-labelledby="tab-more">
-                    <div class="gallery-track" tabindex="0" aria-label="More app screens, scroll sideways">
-                        <figure class="phone"><img src="img/screens/login.png" alt="Login screen" loading="lazy"><figcaption>Sign In</figcaption></figure>
-                        <figure class="phone"><img src="img/screens/home.png" alt="Home screen with Scan and Verify and quick actions" loading="lazy"><figcaption>Home</figcaption></figure>
-                        <figure class="phone"><img src="img/screens/scan-qr.png" alt="Scan QR Code screen" loading="lazy"><figcaption>QR Scanner</figcaption></figure>
-                        <figure class="phone"><img src="img/screens/upload-file.png" alt="Upload File screen" loading="lazy"><figcaption>File Upload</figcaption></figure>
-                        <figure class="phone"><img src="img/screens/scan-history.png" alt="Scan History screen" loading="lazy"><figcaption>Scan History</figcaption></figure>
-                        <figure class="phone"><img src="img/screens/knowledge-center.png" alt="Knowledge Center screen" loading="lazy"><figcaption>Knowledge Center</figcaption></figure>
-                        <figure class="phone"><img src="img/screens/profile.png" alt="Profile screen" loading="lazy"><figcaption>Profile</figcaption></figure>
-                    </div>
-                </div>            </div>
+                <p class="carousel-caption" aria-live="polite"></p>
+                <div class="carousel-dots" aria-hidden="true"></div>
+            </div>
         </section>
 
         <!-- ============ HOW IT WORKS ============ -->
@@ -368,6 +328,70 @@
                         <p>See whether it looks safe or like a scam, and what to do next.</p>
                     </li>
                 </ol>
+            </div>
+        </section>
+
+        <!-- ============ PRICING / REVENUE PLAN ============ -->
+        <section class="section pricing-section" id="pricing">
+            <div class="container">
+                <div class="section-heading">
+                    <span class="eyebrow">Pricing</span>
+                    <h2>Free to try. <span class="text-gradient swoosh">Paid features</span> for deeper needs.</h2>
+                    <p>Core scam checks are free for everyone. Upgrade when you need more.</p>
+                </div>
+
+                <div class="pricing-grid">
+                    <article class="price-card">
+                        <div class="price-head">
+                            <div class="price-icon"><svg class="icon"><use href="#i-user"/></svg></div>
+                            <h3>Free Individual</h3>
+                        </div>
+                        <p class="price"><span class="amount">₱0</span><span class="period">/ forever</span></p>
+                        <p class="price-desc">Core protection for everyday users. Helps us grow adoption and gather feedback.</p>
+                        <ul class="price-list">
+                            <li><svg class="icon"><use href="#i-check"/></svg>Message &amp; screenshot checks</li>
+                            <li><svg class="icon"><use href="#i-check"/></svg>URL and QR code scanning</li>
+                            <li><svg class="icon"><use href="#i-check"/></svg>Plain-language risk levels</li>
+                            <li><svg class="icon"><use href="#i-check"/></svg>Knowledge Center safety guides</li>
+                        </ul>
+                        <a href="#download" class="btn btn-outline">Get Started Free</a>
+                    </article>
+
+                    <article class="price-card price-featured">
+                        <span class="price-badge">Most Popular</span>
+                        <div class="price-head">
+                            <div class="price-icon"><svg class="icon"><use href="#i-shield-check"/></svg></div>
+                            <h3>Premium Individual</h3>
+                        </div>
+                        <p class="price"><span class="amount">₱99–₱199</span><span class="period">/ month</span></p>
+                        <p class="price-desc">For people who check often and want a full record of what they've scanned.</p>
+                        <ul class="price-list">
+                            <li><svg class="icon"><use href="#i-check"/></svg>Everything in Free</li>
+                            <li><svg class="icon"><use href="#i-check"/></svg>Enhanced scan history</li>
+                            <li><svg class="icon"><use href="#i-check"/></svg>Downloadable scan reports</li>
+                            <li><svg class="icon"><use href="#i-check"/></svg>Additional in-depth analysis</li>
+                        </ul>
+                        <a href="#download" class="btn btn-primary">Go Premium</a>
+                    </article>
+
+                    <article class="price-card">
+                        <div class="price-head">
+                            <div class="price-icon"><svg class="icon"><use href="#i-users"/></svg></div>
+                            <h3>Institutional License</h3>
+                        </div>
+                        <p class="price"><span class="amount">₱15,000–₱30,000</span><span class="period">/ year</span></p>
+                        <p class="price-desc">For schools, offices and organizations protecting many people at once.</p>
+                        <ul class="price-list">
+                            <li><svg class="icon"><use href="#i-check"/></svg>Admin controls</li>
+                            <li><svg class="icon"><use href="#i-check"/></svg>Organization-specific rules</li>
+                            <li><svg class="icon"><use href="#i-check"/></svg>Usage and threat reporting</li>
+                            <li><svg class="icon"><use href="#i-check"/></svg>Dedicated support</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-outline">Contact Us</a>
+                    </article>
+                </div>
+
+                <p class="pricing-note">Prices shown are proposed and may change before official launch.</p>
             </div>
         </section>
 
@@ -569,6 +593,7 @@
                     <li><a href="#features">Features</a></li>
                     <li><a href="#prototype">Our Prototype</a></li>
                     <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
                 </ul>
             </div>
 

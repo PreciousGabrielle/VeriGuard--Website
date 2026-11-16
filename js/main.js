@@ -58,53 +58,166 @@ document.addEventListener("DOMContentLoaded", function () {
     video.addEventListener("dblclick", openFullscreen);
 });
 
-// ---------- 3. Prototype tabs ----------
+// ---------- 3. Prototype screen carousel ----------
+// The chosen screen sits large in the centre and the others shrink and fan
+// out to the sides. Move with the arrows, by swiping/dragging, with a
+// sideways trackpad scroll, with the arrow keys, or by clicking a side card.
 document.addEventListener("DOMContentLoaded", function () {
-    var tabs = Array.prototype.slice.call(document.querySelectorAll(".proto-tab"));
-    if (!tabs.length) return;
+    var carousel = document.querySelector(".proto-carousel");
+    if (!carousel) return;
 
-    function select(tab, focus) {
-        tabs.forEach(function (t) {
-            var on = t === tab;
-            t.setAttribute("aria-selected", String(on));
-            t.tabIndex = on ? 0 : -1;
-            var panel = document.getElementById(t.getAttribute("aria-controls"));
-            panel.hidden = !on;
-            // stop any video in a panel that is being hidden
-            if (!on) panel.querySelectorAll("video").forEach(function (v) { v.pause(); });
-        });
-        if (focus) tab.focus();
+    var stage = carousel.querySelector(".carousel-stage");
+    var cards = Array.prototype.slice.call(stage.querySelectorAll(".screen-card"));
+    var caption = document.querySelector(".carousel-caption");
+    var dotsBox = document.querySelector(".carousel-dots");
+    var count = cards.length;
+    var active = 0; // start on the Sign In (login) screen
+    var narrow = window.matchMedia("(max-width: 640px)");
+    var prevBtn = carousel.querySelector(".carousel-prev");
+    var nextBtn = carousel.querySelector(".carousel-next");
 
-        // on phones the tab bar scrolls sideways: slide it so the chosen
-        // tab is fully visible (moves only the bar, never the page)
-        var bar = tab.parentElement;
-        if (bar.scrollWidth > bar.clientWidth) {
-            var left = tab.offsetLeft - bar.offsetLeft - 5;
-            var right = left + tab.offsetWidth + 10;
-            if (left < bar.scrollLeft) bar.scrollLeft = left;
-            else if (right > bar.scrollLeft + bar.clientWidth) bar.scrollLeft = right - bar.clientWidth;
-        }
+    carousel.classList.add("is-ready");
+
+    var dots = cards.map(function (card, i) {
+        var dot = document.createElement("button");
+        dot.type = "button";
+        dot.tabIndex = -1;
+        dot.addEventListener("click", function () { go(i); });
+        dotsBox.appendChild(dot);
+        return dot;
+    });
+
+    function offset(i) {
+        return i - active;
     }
 
-    tabs.forEach(function (tab, i) {
-        tab.addEventListener("click", function () { select(tab, false); });
-        tab.addEventListener("keydown", function (event) {
-            var next = null;
-            if (event.key === "ArrowRight") next = tabs[(i + 1) % tabs.length];
-            if (event.key === "ArrowLeft")  next = tabs[(i - 1 + tabs.length) % tabs.length];
-            if (event.key === "Home") next = tabs[0];
-            if (event.key === "End")  next = tabs[tabs.length - 1];
-            if (next) { event.preventDefault(); select(next, true); }
+    function layout() {
+        var cardW = cards[0].offsetWidth;
+        var maxSide = narrow.matches ? 1 : 2;
+        cards.forEach(function (card, i) {
+            var d = offset(i);
+            var a = Math.abs(d);
+            var side = d < 0 ? -1 : 1;
+            // cards sit side by side with a clear gap between them (no overlap)
+            var scale = a === 0 ? 1 : a === 1 ? 0.62 : 0.46;
+            var gap = narrow.matches ? 16 : 26;
+            var x = 0;
+            if (a >= 1) x = cardW * (0.5 + 0.31) + gap;
+            if (a >= 2) x += cardW * (0.31 + 0.23) + gap;
+            x *= side;
+            // flat 2D movement only (3D tilts make the screenshots blurry); the centre card has no transform at all
+            card.style.transform = a === 0 ? "none" : "translateX(" + Math.round(x) + "px) scale(" + scale + ")";
+            card.style.zIndex = String(10 - a);
+            card.style.opacity = a > maxSide ? "0" : "1";
+            card.style.pointerEvents = a > maxSide ? "none" : "auto";
+            card.classList.toggle("is-active", a === 0);
+            card.setAttribute("aria-hidden", a === 0 ? "false" : "true");
+        });
+        dots.forEach(function (dot, i) { dot.classList.toggle("is-active", i === active); });
+        prevBtn.disabled = active === 0;
+        nextBtn.disabled = active === count - 1;
+        var current = cards[active];
+        var label = current.querySelector("figcaption");
+        caption.innerHTML = "<small>" + label.querySelector("small").textContent + "</small><strong>" + label.lastChild.textContent + "</strong><span>" + current.getAttribute("data-desc") + "</span>";
+    }
+
+    function go(i) {
+        // no looping: screens run in order from Sign In (left) to Profile (right)
+        active = Math.max(0, Math.min(count - 1, i));
+        layout();
+    }
+
+    prevBtn.addEventListener("click", function () { go(active - 1); });
+    nextBtn.addEventListener("click", function () { go(active + 1); });
+
+    cards.forEach(function (card, i) {
+        card.addEventListener("click", function () {
+            if (dragged) return;
+            if (i !== active) go(i);
+            else openViewer(card.querySelector("img"));
         });
     });
 
-    // show only the first panel once JavaScript is running
-    select(tabs[0], false);
+    stage.addEventListener("keydown", function (event) {
+        if (event.key === "ArrowRight") { event.preventDefault(); go(active + 1); }
+        if (event.key === "ArrowLeft")  { event.preventDefault(); go(active - 1); }
+    });
 
-    // always start the tab bar at the far left so "1 · Scan" is visible
-    var tabBar = tabs[0].parentElement;
-    tabBar.scrollLeft = 0;
-    window.addEventListener("load", function () { tabBar.scrollLeft = 0; });
+    // swipe / drag
+    var startX = null, dragged = false;
+    stage.addEventListener("pointerdown", function (event) { startX = event.clientX; dragged = false; });
+    window.addEventListener("pointerup", function (event) {
+        if (startX === null) return;
+        var dx = event.clientX - startX;
+        startX = null;
+        if (Math.abs(dx) > 40) {
+            dragged = true;
+            go(active + (dx < 0 ? 1 : -1));
+            setTimeout(function () { dragged = false; }, 50);
+        }
+    });
+    stage.addEventListener("dragstart", function (event) { event.preventDefault(); });
+
+    // sideways trackpad scroll / shift + mouse wheel
+    var wheelLock = false;
+    stage.addEventListener("wheel", function (event) {
+        var dx = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : (event.shiftKey ? event.deltaY : 0);
+        if (Math.abs(dx) < 12) return;
+        event.preventDefault();
+        if (wheelLock) return;
+        wheelLock = true;
+        go(active + (dx > 0 ? 1 : -1));
+        setTimeout(function () { wheelLock = false; }, 450);
+    }, { passive: false });
+
+    // full-size viewer: click the centre screen to read it properly
+    var viewer = document.createElement("div");
+    viewer.className = "screen-viewer";
+    viewer.setAttribute("role", "dialog");
+    viewer.setAttribute("aria-modal", "true");
+    viewer.innerHTML = '<button class="screen-viewer-close" type="button" aria-label="Close">&times;</button><img alt="">';
+    document.body.appendChild(viewer);
+    var viewerImg = viewer.querySelector("img");
+
+    function openViewer(img) {
+        viewerImg.src = img.src;
+        viewerImg.alt = img.alt;
+        viewer.classList.add("is-open");
+        viewer.querySelector("button").focus();
+    }
+
+    function closeViewer() {
+        if (!viewer.classList.contains("is-open")) return;
+        viewer.classList.remove("is-open");
+        stage.focus();
+    }
+
+    viewer.addEventListener("click", closeViewer);
+    document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") closeViewer();
+    });
+    stage.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" || event.key === " ") { event.preventDefault(); openViewer(cards[active].querySelector("img")); }
+    });
+
+    // when the Prototype section is scrolled out of view, quietly go back
+    // to the Sign In screen so it starts from the beginning next time
+    if ("IntersectionObserver" in window) {
+        var section = carousel.closest("section") || carousel;
+        new IntersectionObserver(function (entries) {
+            if (entries[0].isIntersecting || active === 0) return;
+            carousel.classList.add("no-anim");
+            go(0);
+            stage.offsetWidth; // apply the jump instantly
+            carousel.classList.remove("no-anim");
+        }).observe(section);
+    }
+
+    window.addEventListener("resize", layout);
+    // card size follows the screen height, so re-place the cards whenever it changes
+    if ("ResizeObserver" in window) new ResizeObserver(layout).observe(cards[0]);
+    window.addEventListener("load", layout);
+    layout();
 });
 
 // ---------- 2. Mobile menu ----------

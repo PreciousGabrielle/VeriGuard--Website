@@ -25,3 +25,860 @@
 .swoosh.swoosh-light::after {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20' preserveAspectRatio='none'%3E%3Cpath d='M3 14 C 50 4, 120 1, 197 9' fill='none' stroke='%236aa8ff' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E");
 }
+
+/* =====================================================
+   PAGE BACKGROUND IMAGE
+   A blue "planet glow" gradient, drawn in CSS so it stays
+   sharp on every screen size, fixed behind the whole page.
+   Sections are see-through, so the background is never
+   cut between sections. A soft navy overlay keeps the
+   bright lower part of the image from washing out text.
+===================================================== */
+
+html {
+    background: #03196b;
+}
+
+body {
+    background: transparent;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+        linear-gradient(180deg, rgba(2, 12, 48, 0.1) 0%, rgba(2, 18, 80, 0.15) 55%, rgba(5, 40, 150, 0.38) 100%),
+        radial-gradient(ellipse 65% 80% at 100% 80%, rgba(0, 190, 255, 0.95) 0%, rgba(0, 175, 255, 0.75) 32%, rgba(0, 140, 250, 0.35) 62%, transparent 88%),
+        radial-gradient(ellipse 76% 100% at 46% 0%, transparent 0%, transparent 66%, rgba(80, 160, 255, 0.22) 80%, rgba(180, 225, 255, 0.55) 92%, rgba(232, 247, 255, 0.88) 97.5%, rgba(165, 218, 255, 0.88) 100%),
+        radial-gradient(ellipse 55% 50% at 95% 18%, rgba(5, 60, 215, 0.7) 0%, transparent 70%),
+        linear-gradient(165deg, #020f52 0%, #031c7a 35%, #0530a8 62%, #0a49c8 100%);
+}
+
+/* every section shows the page background */
+.hero,
+.problem-section,
+.features-section,
+.showcase-section,
+.how-section,
+.pricing-section,
+.about-section,
+.download-section,
+.contact-section {
+    background: transparent;
+    border-top: 0;
+}
+
+/* footer fades in from the background instead of starting with a hard line */
+.site-footer {
+    background: linear-gradient(180deg, rgba(4, 14, 48, 0) 0, rgba(4, 14, 48, 0.88) 90px);
+}
+
+/* ---------- Text on the blue background turns light ---------- */
+.hero,
+.problem-section,
+.features-section,
+.showcase-section,
+.how-section,
+.pricing-section,
+.download-section,
+.contact-section {
+    --navy: #ffffff;
+    --text: #e3ecfb;
+    --muted: #c6d7f2;
+    --border: rgba(255, 255, 255, 0.22);
+    color: var(--text);
+}
+
+/* ...but white cards, pills and tabs keep their original dark text */
+.ps-card,
+.audience,
+.audience-chips li,
+.feature-card,
+.price-card,
+.contact-card,
+.proto-tabs {
+    --navy: #0f2a5c;
+    --text: #44597a;
+    --muted: #6b7f9c;
+    --border: #dde7f6;
+    color: var(--text);
+}
+
+/* gradient words + underline in headings use the light version on the blue */
+.hero h1 .text-gradient,
+.section-heading .text-gradient {
+    background: linear-gradient(135deg, #8cc4ff 0%, #e2f1ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.hero h1 .swoosh::after,
+.section-heading .swoosh::after {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20' preserveAspectRatio='none'%3E%3Cpath d='M3 14 C 50 4, 120 1, 197 9' fill='none' stroke='%236aa8ff' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+/* step numbers: soft glass ring instead of a solid white one */
+.step-number {
+    box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.16), 0 10px 24px rgba(0, 0, 0, 0.25);
+}
+
+.steps::before {
+    border-top-color: rgba(255, 255, 255, 0.35);
+}
+
+/* hero "Links / QR codes / Files" icons: light so they show on the blue */
+.hero-checks .icon {
+    color: #8cc4ff;
+}
+
+/* =====================================================
+   GLASS MENU BAR
+   Frosted, see-through bar over the blue background,
+   with a soft light streak along the top edge, white
+   links with small dot markers and a glass button.
+===================================================== */
+
+.site-header {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.06) 100%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    backdrop-filter: blur(18px) saturate(140%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+    box-shadow: 0 8px 30px rgba(2, 12, 48, 0.25);
+}
+
+/* light streak along the top, like light catching the edge of glass */
+.site-header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: min(720px, 80%);
+    height: 18px;
+    transform: translateX(-50%);
+    /* bright thin line in the middle + soft glow, both fading out at the ends (no hard edges) */
+    background:
+        radial-gradient(ellipse 50% 22% at 50% 0%, #ffffff 0%, rgba(255, 255, 255, 0.9) 40%, transparent 100%),
+        radial-gradient(ellipse 50% 100% at 50% 0%, rgba(170, 215, 255, 0.75) 0%, rgba(160, 210, 255, 0.3) 45%, transparent 75%);
+    pointer-events: none;
+}
+
+.site-header .logo-text {
+    color: #ffffff;
+}
+
+.site-header .logo-text span {
+    color: #8cc4ff;
+}
+
+/* links: white, small caps style */
+.site-header .nav-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.82);
+}
+
+.site-header .nav-links a:hover {
+    color: #ffffff;
+}
+
+.site-header .nav-links a::after {
+    background: #8cc4ff;
+}
+
+/* "Download Here": glass pill */
+.site-header .btn-primary {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 6px 18px rgba(2, 12, 48, 0.2);
+}
+
+.site-header .btn-primary:hover {
+    background: rgba(255, 255, 255, 0.24);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), 0 0 24px rgba(140, 196, 255, 0.45);
+}
+
+/* mobile menu button + dropdown in the same glass style */
+.site-header .nav-toggle {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.35);
+}
+
+@media screen and (max-width: 1180px) {
+    .site-header .nav-menu {
+        background: rgba(6, 28, 110, 0.97);
+        -webkit-backdrop-filter: blur(18px);
+        backdrop-filter: blur(18px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .site-header .nav-links a {
+        display: flex;
+        border-bottom-color: rgba(255, 255, 255, 0.14);
+    }
+}
+
+/* keep every link and the button on one line on computers */
+@media screen and (min-width: 1181px) {
+    .site-header .nav-links {
+        gap: 18px;
+    }
+
+    .site-header .nav-menu {
+        gap: 22px;
+    }
+
+    .site-header .btn-primary {
+        white-space: nowrap;
+    }
+}
+
+/* =====================================================
+   ABOUT US CARD OUTLINES
+   Glowing gradient outline (brighter on the top-left,
+   like light catching glass) + a deeper glass fill so
+   text stays readable over the bright background.
+===================================================== */
+
+.mvo-card,
+.team-card {
+    border: 1.5px solid transparent;
+    background:
+        linear-gradient(160deg, rgba(10, 32, 120, 0.55), rgba(6, 22, 90, 0.4)) padding-box,
+        linear-gradient(135deg, rgba(255, 255, 255, 0.75) 0%, rgba(140, 196, 255, 0.35) 35%, rgba(140, 196, 255, 0.12) 65%, rgba(255, 255, 255, 0.5) 100%) border-box;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.18),
+        0 12px 32px rgba(2, 12, 48, 0.28),
+        0 0 0 1px rgba(140, 196, 255, 0.08);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.mvo-card:hover,
+.team-card:hover {
+    transform: translateY(-4px);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.25),
+        0 16px 40px rgba(2, 12, 48, 0.35),
+        0 0 24px rgba(140, 196, 255, 0.35);
+}
+
+/* easier-to-read job titles on the team cards */
+.team-card small {
+    color: #a9d1ff;
+}
+
+.team-card .team-role {
+    color: #dbe7f8;
+}
+
+/* =====================================================
+   HERO BUTTON OUTLINE
+   "Explore Our Prototype" gets the same thin white glass
+   outline as the "Download Here" menu button.
+===================================================== */
+
+.hero .btn-primary {
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 6px 18px rgba(2, 12, 48, 0.2);
+}
+
+.hero .btn-primary:hover {
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), 0 0 24px rgba(140, 196, 255, 0.45);
+}
+
+/* =====================================================
+   GLOWING LOGOS ABOVE THE HERO VIDEO
+   Two separate pieces side by side: VeriGuard on a
+   frosted glass pill, Vericore Solutions on a white
+   tile. Both have a soft, slowly pulsing blue glow.
+===================================================== */
+
+.hero-logos {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    margin: 0 auto 34px;
+}
+
+.hero-logo-veriguard,
+.hero-logo-vericore {
+    animation: logo-glow 3.5s ease-in-out infinite;
+}
+
+/* VeriGuard: glass pill */
+.hero-logo-veriguard {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 60px;
+    padding: 0 20px 0 12px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.06));
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.hero-logo-veriguard img {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(120, 190, 255, 0.85));
+}
+
+.hero-logo-veriguard .logo-text {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #ffffff;
+    text-shadow: 0 0 14px rgba(140, 196, 255, 0.7);
+}
+
+.hero-logo-veriguard .logo-text span {
+    color: #8cc4ff;
+}
+
+/* Vericore Solutions: same glass pill as VeriGuard, emblem + glowing name */
+.hero-logo-vericore {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    height: 60px;
+    padding: 0 20px 0 14px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.06));
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    animation-delay: -1.75s;   /* glows out of step with the VeriGuard pill */
+}
+
+.hero-logo-vericore img {
+    width: auto;
+    height: 34px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 8px rgba(160, 210, 255, 0.9)) brightness(1.15);
+}
+
+.vericore-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1;
+    font-size: 19px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-shadow: 0 0 14px rgba(140, 196, 255, 0.7);
+}
+
+.vericore-text small {
+    margin-top: 4px;
+    font-size: 8.5px;
+    font-weight: 600;
+    letter-spacing: 0.42em;
+    color: #8cc4ff;
+}
+
+@keyframes logo-glow {
+    0%, 100% {
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.35),
+            0 0 22px rgba(110, 180, 255, 0.45),
+            0 10px 26px rgba(2, 12, 48, 0.3);
+    }
+    50% {
+        box-shadow:
+            inset 0 1px 0 rgba(255, 255, 255, 0.45),
+            0 0 40px rgba(130, 195, 255, 0.75),
+            0 10px 26px rgba(2, 12, 48, 0.3);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-logo-veriguard,
+    .hero-logo-vericore {
+        animation: none;
+        box-shadow: 0 0 26px rgba(110, 180, 255, 0.5), 0 10px 26px rgba(2, 12, 48, 0.3);
+    }
+}
+
+/* =====================================================
+   PRICING + FEATURE CARD OUTLINES
+   Same glowing gradient outline as the About Us cards:
+   bright white on the top-left fading to soft blue, with
+   a light blue halo. The Premium card gets a bolder blue.
+===================================================== */
+
+.feature-card,
+.price-card {
+    border: 2px solid transparent;
+    background:
+        linear-gradient(#ffffff, #ffffff) padding-box,
+        linear-gradient(135deg, #ffffff 0%, #b9dcff 35%, #7fb6ff 65%, #e6f2ff 100%) border-box;
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.35),
+        0 0 22px rgba(140, 196, 255, 0.45),
+        0 14px 34px rgba(2, 12, 48, 0.25);
+}
+
+.feature-card:hover,
+.price-card:hover {
+    border-color: transparent;
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.5),
+        0 0 34px rgba(140, 196, 255, 0.7),
+        0 18px 40px rgba(2, 12, 48, 0.3);
+}
+
+/* "Most Popular" Premium card: bolder blue outline */
+.price-featured,
+.price-featured:hover {
+    background:
+        linear-gradient(#ffffff, #ffffff) padding-box,
+        linear-gradient(135deg, #8cc4ff 0%, #1f6fe5 45%, #1556c4 70%, #8cc4ff 100%) border-box;
+}
+
+/* =====================================================
+   DOWNLOAD CARD OUTLINE
+   Same glowing gradient outline as the other cards,
+   keeping the card's own blue fill.
+===================================================== */
+
+.download-card {
+    border: 2px solid transparent;
+    background:
+        radial-gradient(circle at 90% 10%, rgba(255, 255, 255, 0.18), transparent 40%) padding-box,
+        linear-gradient(135deg, #2f7cf0 0%, #1556c4 55%, #0f3f99 100%) padding-box,
+        linear-gradient(135deg, #ffffff 0%, #b9dcff 30%, rgba(127, 182, 255, 0.55) 60%, #e6f2ff 100%) border-box;
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.25),
+        0 0 30px rgba(140, 196, 255, 0.5),
+        0 30px 60px rgba(2, 12, 48, 0.35);
+}
+
+/* =====================================================
+   PROTOTYPE SCREEN CAROUSEL
+   Centre card large, neighbours smaller and angled to
+   the sides (driven by js/main.js, section 3). Cards are
+   glowing gradient frames with a glass caption bar.
+   Without JavaScript: a plain sideways-scrolling row.
+===================================================== */
+
+.proto-carousel {
+    --card-h: clamp(300px, min(54vh, 100vh - 400px), 620px);   /* leaves room for the heading + caption on short screens */
+    --card-w: calc((var(--card-h) - 16px) * 0.462 + 16px);   /* matches the screenshots (780 x 1688) */
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-stage {
+    position: relative;
+    flex: 1;
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 10px 0;
+    outline: none;
+}
+
+/* JavaScript version: cards stacked in the centre and moved by transforms */
+.proto-carousel.is-ready .carousel-stage {
+    height: calc(var(--card-h) + 20px);
+    overflow: visible;
+    touch-action: pan-y;
+    cursor: grab;
+    user-select: none;
+}
+
+.proto-carousel.is-ready .carousel-stage:active {
+    cursor: grabbing;
+}
+
+.screen-card {
+    position: relative;
+    flex: none;
+    width: var(--card-w);
+    height: var(--card-h);
+    margin: 0;
+    padding: 8px;
+    border-radius: 28px;
+    overflow: hidden;
+    border: 2px solid transparent;
+    background:
+        linear-gradient(160deg, #3a7cf6 0%, #6d4fe8 55%, #c04fd8 100%) padding-box,
+        linear-gradient(135deg, #ffffff 0%, #b9dcff 35%, rgba(127, 182, 255, 0.5) 65%, #f0d6ff 100%) border-box;
+    box-shadow: 0 0 22px rgba(140, 196, 255, 0.35), 0 20px 40px rgba(2, 12, 48, 0.4);
+}
+
+.proto-carousel.is-ready .screen-card {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    margin-left: calc(var(--card-w) / -2);
+    transition: transform 0.55s cubic-bezier(0.22, 0.9, 0.3, 1), opacity 0.45s ease, box-shadow 0.4s ease;
+    cursor: pointer;
+}
+
+.proto-carousel.is-ready .screen-card.is-active {
+    cursor: default;
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.4),
+        0 0 40px rgba(150, 170, 255, 0.75),
+        0 26px 50px rgba(2, 12, 48, 0.45);
+}
+
+.screen-card img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 21px;
+    pointer-events: none;
+}
+
+/* glass caption bar along the bottom of each card */
+.screen-card figcaption {
+    position: absolute;
+    left: 14px;
+    right: 14px;
+    bottom: 14px;
+    padding: 10px 14px;
+    border-radius: 16px;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: #ffffff;
+    background: rgba(10, 24, 80, 0.55);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+}
+
+.screen-card figcaption small {
+    display: block;
+    margin-bottom: 2px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #a9d1ff;
+}
+
+/* arrows: glass circles, same style as "Download Here" */
+.carousel-arrow {
+    position: relative;
+    z-index: 20;
+    flex: none;
+    width: 52px;
+    height: 52px;
+    display: none;
+    place-items: center;
+    border-radius: 50%;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 6px 18px rgba(2, 12, 48, 0.25);
+    cursor: pointer;
+    transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.proto-carousel.is-ready .carousel-arrow {
+    display: grid;
+}
+
+.carousel-arrow:hover {
+    background: rgba(255, 255, 255, 0.24);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), 0 0 24px rgba(140, 196, 255, 0.45);
+    transform: scale(1.06);
+}
+
+.carousel-arrow .icon {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* description of the centre screen */
+.carousel-caption {
+    max-width: 720px;
+    min-height: 2.6em;
+    margin: clamp(10px, 1.8vh, 18px) auto 0;
+    text-align: center;
+    font-size: clamp(14px, 1.9vh, 16px);
+    color: var(--text);
+}
+
+.carousel-caption strong {
+    display: block;
+    font-size: 1.15em;
+    color: var(--navy);
+}
+
+.carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.carousel-dots button {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.35);
+    cursor: pointer;
+    transition: width 0.3s ease, background 0.3s ease;
+}
+
+.carousel-dots button.is-active {
+    width: 26px;
+    background: #ffffff;
+    box-shadow: 0 0 10px rgba(160, 210, 255, 0.8);
+}
+
+@media screen and (max-width: 640px) {
+    .proto-carousel {
+        --card-h: clamp(300px, 58vh, 460px);
+    }
+
+    .carousel-arrow {
+        position: absolute;
+        width: 42px;
+        height: 42px;
+    }
+
+    .carousel-prev { left: 0; }
+    .carousel-next { right: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .proto-carousel.is-ready .screen-card {
+        transition: opacity 0.2s ease;
+    }
+}
+
+/* sharper carousel screenshots: dim side cards with an overlay
+   (not a filter), so the screenshots stay crisp */
+
+.proto-carousel.is-ready .screen-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: rgba(4, 14, 60, 0.38);
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.proto-carousel.is-ready .screen-card.is-active::after {
+    opacity: 0;
+}
+
+/* ---------- Carousel readability ----------
+   The labels move out of the cards (into the caption under the
+   carousel) so nothing covers the screen, and the centre screen
+   can be opened full size. */
+
+.proto-carousel.is-ready .screen-card figcaption {
+    display: none;
+}
+
+.proto-carousel.is-ready .screen-card.is-active {
+    cursor: zoom-in;
+}
+
+/* small "enlarge" hint on the centre card */
+.proto-carousel.is-ready .screen-card.is-active::before {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    right: 14px;
+    bottom: 14px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5M11 8v6M8 11h6'/%3E%3C/svg%3E") center / 20px no-repeat,
+        rgba(10, 24, 80, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    box-shadow: 0 4px 12px rgba(2, 12, 48, 0.35);
+    pointer-events: none;
+}
+
+.prototype-section-tight .section-heading,
+.showcase-section .section-heading {
+    margin-bottom: clamp(12px, 2.2vh, 30px);
+}
+
+.carousel-caption small {
+    display: block;
+    margin-bottom: 2px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #8cc4ff;
+}
+
+/* full-size screen viewer */
+.screen-viewer {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(2, 8, 30, 0.82);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    cursor: zoom-out;
+}
+
+.screen-viewer.is-open {
+    display: flex;
+    animation: viewer-in 0.25s ease;
+}
+
+.screen-viewer img {
+    max-height: calc(100vh - 48px);
+    max-height: calc(100svh - 48px);
+    max-width: 100%;
+    border-radius: 28px;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 50px rgba(140, 196, 255, 0.5), 0 30px 60px rgba(0, 0, 0, 0.5);
+}
+
+.screen-viewer-close {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    font-size: 26px;
+    line-height: 1;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    cursor: pointer;
+}
+
+@keyframes viewer-in {
+    from { opacity: 0; transform: scale(0.97); }
+    to   { opacity: 1; transform: none; }
+}
+
+/* ---------- Carousel cards as real iPhones ----------
+   Black bezel with a thin dark-metal edge instead of the
+   coloured frame. The centre phone keeps a soft blue glow. */
+
+.screen-card {
+    border: 2px solid transparent;
+    background:
+        linear-gradient(180deg, #121419 0%, #050608 100%) padding-box,
+        linear-gradient(135deg, #6b6f78 0%, #24262c 30%, #0c0d10 55%, #3d4048 80%, #8a8e97 100%) border-box;
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+        0 18px 40px rgba(2, 8, 30, 0.5);
+}
+
+.proto-carousel.is-ready .screen-card.is-active {
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+        0 0 36px rgba(110, 180, 255, 0.45),
+        0 26px 50px rgba(2, 8, 30, 0.55);
+}
+
+/* thinner iPhone bezel */
+.screen-card {
+    padding: 4px;
+    border-width: 1px;
+    border-radius: 26px;
+}
+
+.screen-card img {
+    border-radius: 22px;
+}
+
+.proto-carousel {
+    --card-w: calc((var(--card-h) - 10px) * 0.462 + 10px);   /* screenshot + thin bezel */
+}
+
+/* carousel arrows fade out at the first / last screen */
+.carousel-arrow:disabled {
+    opacity: 0.3;
+    cursor: default;
+    transform: none;
+    box-shadow: none;
+}
+
+/* ---------- Bigger centre phone ----------
+   The selected screen gets most of the height; side phones
+   shrink more so the row stays the same width. */
+
+.proto-carousel {
+    --card-h: clamp(340px, min(66vh, 100vh - 345px), 700px);
+}
+
+@media screen and (max-width: 640px) {
+    .proto-carousel {
+        --card-h: clamp(320px, 62vh, 520px);
+    }
+}
+
+/* the subtitle isn't needed: the arrows make browsing obvious */
+.showcase-section .section-heading p {
+    display: none;
+}
+
+.showcase-section .section-heading {
+    margin-bottom: clamp(8px, 1.6vh, 20px);
+}
+
+/* step label + title on one line, description underneath */
+.carousel-caption small,
+.carousel-caption strong {
+    display: inline-block;
+    vertical-align: baseline;
+}
+
+.carousel-caption small {
+    margin: 0 10px 0 0;
+}
+
+.carousel-caption span {
+    display: block;
+}
+
+/* instant reset (no slide) when the carousel goes back to Sign In off-screen */
+.proto-carousel.no-anim .screen-card,
+.proto-carousel.no-anim .screen-card::after {
+    transition: none !important;
+}

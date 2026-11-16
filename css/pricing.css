@@ -1,0 +1,169 @@
+/* =====================================================
+   PRICING / REVENUE PLAN
+   Sizes follow screen height so the whole section
+   fits on one screen on laptops and desktops.
+===================================================== */
+
+.pricing-section {
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    align-items: stretch;
+    padding-top: 12px;          /* room for the "Most Popular" badge */
+}
+
+.price-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(16px, 2.6vh, 28px) clamp(20px, 2vw, 28px);
+    border-radius: var(--radius);
+    background: var(--white);
+    border: 1px solid var(--border);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.price-card:hover {
+    transform: translateY(-6px);
+    border-color: #b8d1f7;
+    box-shadow: var(--shadow);
+}
+
+/* highlighted middle plan */
+.price-featured {
+    border: 2px solid var(--blue);
+    box-shadow: var(--shadow-lg);
+}
+
+.price-badge {
+    position: absolute;
+    top: -13px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 4px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--white);
+    background: var(--gradient);
+    box-shadow: 0 8px 18px rgba(31, 111, 229, 0.3);
+}
+
+/* icon sits beside the plan name to save height */
+.price-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.price-icon {
+    flex: none;
+    width: clamp(38px, 5vh, 46px);
+    height: clamp(38px, 5vh, 46px);
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    color: var(--white);
+    background: var(--gradient);
+    box-shadow: 0 8px 18px rgba(31, 111, 229, 0.25);
+}
+
+.price-icon .icon {
+    width: 20px;
+    height: 20px;
+}
+
+.price-card h3 {
+    font-size: clamp(17px, 2.2vh, 19px);
+    font-weight: 700;
+}
+
+.price {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    margin: clamp(8px, 1.6vh, 14px) 0 clamp(4px, 0.8vh, 8px);
+    white-space: nowrap;
+}
+
+.price .amount {
+    font-size: clamp(22px, min(1.9vw, 3.6vh), 30px);
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1.1;
+}
+
+.price .period {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--muted);
+}
+
+.price-desc {
+    font-size: clamp(14px, 1.8vh, 15px);
+    line-height: 1.5;
+    color: var(--muted);
+}
+
+.price-list {
+    list-style: none;
+    margin: clamp(10px, 1.8vh, 18px) 0;
+    padding: clamp(10px, 1.8vh, 16px) 0 0;
+    border-top: 1px solid var(--border);
+    display: grid;
+    gap: clamp(5px, 1vh, 10px);
+    flex: 1;
+    align-content: start;
+}
+
+.price-list li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: clamp(14px, 1.8vh, 15px);
+    color: var(--text);
+}
+
+.price-list .icon {
+    flex: none;
+    width: 18px;
+    height: 18px;
+    color: var(--success);
+}
+
+.price-card .btn {
+    width: 100%;
+    justify-content: center;
+    padding-top: clamp(10px, 1.5vh, 14px);
+    padding-bottom: clamp(10px, 1.5vh, 14px);
+}
+
+.pricing-note {
+    margin-top: clamp(10px, 2vh, 20px);
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+/* tighter heading for this section only */
+.pricing-section .section-heading {
+    margin-bottom: clamp(16px, 3vh, 36px);
+}
+
+/* ---------- Tablets & phones ---------- */
+@media screen and (max-width: 980px) {
+    .pricing-grid {
+        grid-template-columns: 1fr;
+        max-width: 480px;
+        margin: 0 auto;
+        gap: 32px;
+    }
+}
