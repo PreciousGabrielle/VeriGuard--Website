@@ -882,3 +882,69 @@ body::before {
 .proto-carousel.no-anim .screen-card::after {
     transition: none !important;
 }
+
+/* ---------- Logo pills on phones ----------
+   Smaller pills so both fit side by side on narrow screens. */
+@media screen and (max-width: 640px) {
+    .hero-logos {
+        gap: 10px;
+        margin-bottom: 24px;
+    }
+
+    .hero-logo-veriguard,
+    .hero-logo-vericore {
+        height: 46px;
+        gap: 6px;
+        padding: 0 12px 0 8px;
+    }
+
+    .hero-logo-veriguard img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .hero-logo-veriguard .logo-text {
+        font-size: 16px;
+    }
+
+    .hero-logo-vericore img {
+        height: 24px;
+    }
+
+    .vericore-text {
+        font-size: 14px;
+    }
+
+    .vericore-text small {
+        font-size: 6.5px;
+        letter-spacing: 0.32em;
+    }
+}
+
+
+/* ---------- Phones & tablets: no blue band while scrolling ----------
+   When the browser's address bar hides, the screen grows taller. The
+   fixed background is made taller than the screen (and the page colour
+   matches its bottom) so nothing different ever shows underneath. */
+body::before {
+    bottom: auto;
+    height: 100vh;
+    height: 100lvh;          /* the tallest the screen can get */
+    min-height: calc(100vh + 120px);
+}
+
+html {
+    background: #0a3fb4;    /* same blue as the bottom of the background */
+}
+
+/* ---------- Logo pills never squeeze into each other ---------- */
+.hero-logos {
+    flex-wrap: wrap;
+}
+
+.hero-logo-veriguard,
+.hero-logo-vericore {
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
