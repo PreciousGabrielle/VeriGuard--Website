@@ -948,3 +948,32 @@ html {
     white-space: nowrap;
 }
 
+
+/* ---------- No blue tap box on phones and tablets ----------
+   Mobile browsers flash a blue/grey box over anything you tap.
+   Turn it off everywhere, and remove the focus outline for taps
+   and clicks (keyboard users still get a visible outline). */
+html {
+    -webkit-tap-highlight-color: transparent;
+}
+
+a,
+button,
+[tabindex],
+.screen-card {
+    -webkit-tap-highlight-color: transparent;
+}
+
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible),
+[tabindex]:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* stop phones keeping the hover look stuck on a button after a tap */
+@media (hover: none) {
+    .carousel-arrow:hover {
+        transform: none;
+        background: rgba(255, 255, 255, 0.14);
+    }
+}
